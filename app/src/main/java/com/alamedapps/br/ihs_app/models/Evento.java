@@ -12,6 +12,14 @@ public class Evento {
     private boolean isMissa;
     private String descricao;
 
+    public Evento(){}
+
+    public Evento(ArrayList<String> horarios, boolean isMissa, String descricao) {
+        this.horarios = horarios;
+        this.isMissa = isMissa;
+        this.descricao = descricao;
+    }
+
     public int getId() {
         return id;
     }

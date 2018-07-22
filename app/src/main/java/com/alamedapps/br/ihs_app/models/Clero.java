@@ -9,6 +9,15 @@ public class Clero {
     private String nome;
     private String cargoTitulo;
     private String dataNascimento;
+    private String dataOrdenacao;
+
+    public Clero(int id, String nome, String cargoTitulo, String dataNascimento, String dataOrdenacao) {
+        this.id = id;
+        this.nome = nome;
+        this.cargoTitulo = cargoTitulo;
+        this.dataNascimento = dataNascimento;
+        this.dataOrdenacao = dataOrdenacao;
+    }
 
     public int getId() {
         return id;
@@ -40,5 +49,13 @@ public class Clero {
 
     public void setDataNascimento(String dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public String getDataOrdenacao() {
+        return dataOrdenacao;
+    }
+
+    public void setDataOrdenacao(String dataOrdenacao) {
+        this.dataOrdenacao = dataOrdenacao;
     }
 }
