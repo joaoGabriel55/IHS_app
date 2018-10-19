@@ -7,6 +7,8 @@ public class Secretaria {
     private String nomeSecretaria;
     private String contato;
 
+    public Secretaria(){}
+
     public Secretaria(String expediente, String nomeSecretaria, String contato) {
         this.expediente = expediente;
         this.nomeSecretaria = nomeSecretaria;

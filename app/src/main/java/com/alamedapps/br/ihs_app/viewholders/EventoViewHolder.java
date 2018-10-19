@@ -1,4 +1,4 @@
-package com.alamedapps.br.ihs_app.adaptersAndViewHolders;
+package com.alamedapps.br.ihs_app.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -12,13 +12,15 @@ public class EventoViewHolder extends RecyclerView.ViewHolder {
 
     public final LinearLayout linearLayout;
     public final TextView nomeEvento;
-    //public final ImageView img;
+    public final ImageView imgMissa;
+    public final ImageView imgNotMissa;
     public final TextView horarios;
 
     public EventoViewHolder(View itemView) {
         super(itemView);
         nomeEvento = itemView.findViewById(R.id.descricao_evento);
-        //img = itemView.findViewById(R.id.foto_local);
+        imgMissa = itemView.findViewById(R.id.is_missa);
+        imgNotMissa = itemView.findViewById(R.id.is_not_missa);
         horarios = itemView.findViewById(R.id.horarios);
         linearLayout = itemView.findViewById(R.id.linearLayoutLocal);
     }

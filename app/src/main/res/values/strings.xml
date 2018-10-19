@@ -2,8 +2,16 @@
     <string name="app_name">Santuário da Esperança</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">Santuário da Esperança</string>
+    <string name="nav_header_subtitle">Cidade da Esperança - Natal/RN</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="eventos">Eventos</string>
+    <string name="secretaria">Secretaria</string>
+    <string name="clero">Clero</string>
+    <string name="pastorais_movimentos">Igreja em Ação</string>
+    <string name="label_map">Nossa Igreja</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="como_chegar">Como chegar?</string>
+    <string name="taxas">Taxas e Emolumentos</string>
 </resources>

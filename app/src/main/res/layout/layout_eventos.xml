@@ -2,68 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_arvore"
+    android:id="@+id/layout_eventos"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:cardCornerRadius="5dp">
+        android:layout_margin="4dp"
+        app:cardCornerRadius="4dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal"
+                android:layout_margin="8dp">
 
                 <ImageView
-                    android:id="@+id/foto_local"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:id="@+id/is_missa"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_church_icon_eventos" />
 
-                    android:scaleType="centerCrop"/>
+                <ImageView
+                    android:id="@+id/is_not_missa"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:visibility="gone"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_terco_evento" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/linearLayoutLocal"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="290dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/descricao_evento"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/google_new_font"
                         android:text="Evento"
                         android:textColor="@android:color/black"
-                        android:textSize="21dp"
-                        android:textStyle="bold" />
+                        android:textSize="18dp"/>
 
                     <TextView
                         android:id="@+id/horarios"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="Horarios"
-                        android:textSize="16dp" />
+                        android:textSize="16sp" />
+
                 </LinearLayout>
 
             </LinearLayout>

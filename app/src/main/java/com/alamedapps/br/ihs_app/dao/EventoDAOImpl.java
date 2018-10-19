@@ -1,6 +1,6 @@
 package com.alamedapps.br.ihs_app.dao;
 
-import com.alamedapps.br.ihs_app.adaptersAndViewHolders.EventoAdapter;
+import com.alamedapps.br.ihs_app.adapters.EventoAdapter;
 import com.alamedapps.br.ihs_app.models.Evento;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;

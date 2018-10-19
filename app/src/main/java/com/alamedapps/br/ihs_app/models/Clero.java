@@ -10,13 +10,18 @@ public class Clero {
     private String cargoTitulo;
     private String dataNascimento;
     private String dataOrdenacao;
+    private String image;
 
-    public Clero(int id, String nome, String cargoTitulo, String dataNascimento, String dataOrdenacao) {
+    public Clero() {
+    }
+
+    public Clero(int id, String nome, String cargoTitulo, String dataNascimento, String dataOrdenacao, String image) {
         this.id = id;
         this.nome = nome;
         this.cargoTitulo = cargoTitulo;
         this.dataNascimento = dataNascimento;
         this.dataOrdenacao = dataOrdenacao;
+        this.image = image;
     }
 
     public int getId() {
@@ -57,5 +62,13 @@ public class Clero {
 
     public void setDataOrdenacao(String dataOrdenacao) {
         this.dataOrdenacao = dataOrdenacao;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

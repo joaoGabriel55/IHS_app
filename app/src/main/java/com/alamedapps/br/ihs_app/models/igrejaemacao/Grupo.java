@@ -13,6 +13,8 @@ public class Grupo {
     private CategoriaGrupo categoriaGrupo;
     private String reuniao;
 
+    public Grupo() {
+    }
 
     public Grupo(int id, String nome, String descricao,
                  List<String> documentos, List<String> coordenadores,

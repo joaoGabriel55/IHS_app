@@ -1,4 +1,4 @@
-package com.alamedapps.br.ihs_app.adaptersAndViewHolders;
+package com.alamedapps.br.ihs_app.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Evento;
+import com.alamedapps.br.ihs_app.viewholders.EventoViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,8 +54,20 @@ public class EventoAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         final EventoViewHolder eventoViewHolder = (EventoViewHolder) holder;
         Evento evento = eventoList.get(position);
+
+        if(evento.isMissa()) {
+            eventoViewHolder.imgMissa.setVisibility(View.VISIBLE);
+            eventoViewHolder.imgNotMissa.setVisibility(View.GONE);
+        } else {
+            eventoViewHolder.imgMissa.setVisibility(View.GONE);
+            eventoViewHolder.imgNotMissa.setVisibility(View.VISIBLE);
+        }
+
         eventoViewHolder.nomeEvento.setText(evento.getDescricao());
-        eventoViewHolder.horarios.setText(evento.getHorarios().toString());
+
+        String horariosFormated = evento.getHorarios().toString().replace("[", "").replace("]", "");
+
+        eventoViewHolder.horarios.setText(horariosFormated);
     }
 
     @Override

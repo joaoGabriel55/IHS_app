@@ -1,10 +1,13 @@
-package com.alamedapps.br.ihs_app.models.igrejaemacao;
+package com.alamedapps.br.ihs_app.models;
 
 public class TaxasEmolumentos {
 
     private int id;
     private String nome;
     private Double valor;
+
+    public TaxasEmolumentos() {
+    }
 
     public TaxasEmolumentos(int id, String nome, Double valor) {
         this.id = id;

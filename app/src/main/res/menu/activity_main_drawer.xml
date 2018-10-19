@@ -5,34 +5,62 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_outline_home_24px"
+            android:title="Início" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_secretaria"
+            android:icon="@drawable/ic_outline_person_outline_24px"
+            android:title="Secretaria" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_clero"
+            android:icon="@drawable/ic_cruz"
+            android:title="Clero" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_igreja_acao"
+            android:icon="@drawable/ic_church_menu"
+            android:title="Igreja em Ação" />
+
+        <item
+            android:id="@+id/nav_comuninade"
+            android:icon="@drawable/ic_community"
+            android:title="Comunidade" />
+
+        <item
+            android:id="@+id/nav_religiosidade"
+            android:icon="@drawable/ic_pray"
+            android:title="Religiosidade" />
+
+        <item
+            android:id="@+id/nav_taxas"
+            android:icon="@drawable/ic_coins"
+            android:title="Taxas e Emolumentos" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
+    <group android:checkableBehavior="single">
+        <item android:title="Contato">
+            <menu>
+                <item
+                    android:id="@+id/nav_map"
+                    android:icon="@drawable/ic_outline_pin_drop_24px"
+                    android:title="Como chegar?" />
+                <item
+                    android:id="@+id/nav_share"
+                    android:icon="@drawable/ic_menu_share"
+                    android:title="Redes Sociais" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Sobre o App">
+            <menu>
+                <item
+                    android:id="@+id/nav_info"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="Créditos" />
+            </menu>
+        </item>
+    </group>
 
 </menu>

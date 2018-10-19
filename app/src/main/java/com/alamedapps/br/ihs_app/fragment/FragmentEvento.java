@@ -1,5 +1,6 @@
 package com.alamedapps.br.ihs_app.fragment;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alamedapps.br.ihs_app.R;
-import com.alamedapps.br.ihs_app.adaptersAndViewHolders.EventoAdapter;
+import com.alamedapps.br.ihs_app.adapters.EventoAdapter;
 import com.alamedapps.br.ihs_app.dao.EventoDAOImpl;
 import com.alamedapps.br.ihs_app.models.Evento;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
@@ -57,5 +58,12 @@ public class FragmentEvento extends Fragment {
         eventoDAO.getAllEventos(mChildEventListener, evento, mDatabaseReference, adapter);
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        //you can set the title for your toolbar here for different fragments different titles
+        getActivity().setTitle(R.string.eventos);
     }
 }
