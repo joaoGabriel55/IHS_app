@@ -57,6 +57,10 @@ public class CleroAdapter extends RecyclerView.Adapter {
 
     }
 
+    public List<Clero> getCleroList() {
+        return cleroList;
+    }
+
     @Override
     public int getItemCount() {
         return cleroList != null ? cleroList.size() : 0;

@@ -12,8 +12,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
+import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.CleroAdapter;
 import com.alamedapps.br.ihs_app.dao.CleroDAOImpl;
@@ -55,6 +59,10 @@ public class FragmentClero extends Fragment {
         recyclerView = v.findViewById(R.id.recyclerviewClero);
 
         cleroAdapter = new CleroAdapter(null, getContext());
+
+        CleroDAOImpl cleroDAO = new CleroDAOImpl();
+        cleroDAO.getAll(mChildEventListener, mDatabaseReference, cleroAdapter);
+
         recyclerView.setAdapter(cleroAdapter);
         RecyclerView.LayoutManager layout = new GridLayoutManager(getContext(), 2);
         //RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -63,13 +71,19 @@ public class FragmentClero extends Fragment {
         recyclerView.addOnItemTouchListener(new IHSRecyclerView(getActivity(), recyclerView, new IHSRecyclerView.ItemTouch() {
             @Override
             public void clickSimples(View view, int position) {
-                Log.i("MASA", "CLICK");
+                String cargo = cleroAdapter.getCleroList().get(position).getCargoTitulo();
+                new MaterialDialog.Builder(getContext())
+                        .title(cleroAdapter.getCleroList().get(position).getNome())
+                        .content("Data Nascimento:" + " " + cleroAdapter.getCleroList().get(position).getDataNascimento() + "\n" +
+                                "Data Ordenação: " + " " + cleroAdapter.getCleroList().get(position).getDataOrdenacao() + "\n" +
+                                "Cargo/Título: " + " " + cleroAdapter.getCleroList().get(position).getCargoTitulo() + "\n"
+
+                        )
+                        .positiveText(R.string.fechar)
+                        .show();
             }
         }));
 
-        CleroDAOImpl cleroDAO = new CleroDAOImpl();
-        clero = new Clero();
-        cleroDAO.getAll(mChildEventListener, mDatabaseReference, cleroAdapter);
 
         return v;
     }

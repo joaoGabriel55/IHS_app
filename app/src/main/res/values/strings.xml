@@ -14,4 +14,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="como_chegar">Como chegar?</string>
     <string name="taxas">Taxas e Emolumentos</string>
+    <string name="fechar">Fechar</string>
 </resources>
