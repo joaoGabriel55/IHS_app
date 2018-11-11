@@ -21,7 +21,7 @@ public class CleroViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
 
         nome = itemView.findViewById(R.id.nome_clero);
-        image = itemView.findViewById(R.id.profile_clero);
+        image = itemView.findViewById(R.id.image_clero);
 
     }
 

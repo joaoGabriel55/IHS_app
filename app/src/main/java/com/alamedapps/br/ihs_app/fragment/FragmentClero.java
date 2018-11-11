@@ -6,15 +6,19 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.CleroAdapter;
 import com.alamedapps.br.ihs_app.dao.CleroDAOImpl;
 import com.alamedapps.br.ihs_app.models.Clero;
+import com.alamedapps.br.ihs_app.utils.IHSRecyclerView;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
@@ -44,7 +48,7 @@ public class FragmentClero extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_clero, container, false);
 
-        imageView = v.findViewById(R.id.profile_clero);
+        imageView = v.findViewById(R.id.image_clero);
 
         mDatabaseReference = mFirebaseDatabase.getReference().child("clero");
 
@@ -52,9 +56,16 @@ public class FragmentClero extends Fragment {
 
         cleroAdapter = new CleroAdapter(null, getContext());
         recyclerView.setAdapter(cleroAdapter);
-       // RecyclerView.LayoutManager layout = new GridLayoutManager(getContext(), 2);
-        RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layout = new GridLayoutManager(getContext(), 2);
+        //RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
+
+        recyclerView.addOnItemTouchListener(new IHSRecyclerView(getActivity(), recyclerView, new IHSRecyclerView.ItemTouch() {
+            @Override
+            public void clickSimples(View view, int position) {
+                Log.i("MASA", "CLICK");
+            }
+        }));
 
         CleroDAOImpl cleroDAO = new CleroDAOImpl();
         clero = new Clero();

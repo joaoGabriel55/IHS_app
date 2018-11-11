@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Clero;
@@ -38,13 +40,29 @@ public class IHSUtil {
         recyclerView.setLayoutManager(layout);
     }
 
-    public static void handleImage(ImageView imageView, Clero clero, Context context) {
+    public static void handleImage(final ImageView imageView, Clero clero, final Context context) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         final StorageReference storageRef = storage.getReference().child(clero.getImage());
 
+        //final StorageReference storageRef = storage.getReferenceFromUrl("gs://appihs-5a938.appspot.com/").child(clero.getImage());
 
+        Glide.with(imageView.getContext().getApplicationContext())
+                .using(new FirebaseImageLoader())
+                .load(storageRef)
+                .into(imageView);
 
-        Glide.with(context).load(generatedFilePath).into(imageView);
-
+//        storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//            @Override
+//            public void onSuccess(Uri uri) {
+//                Glide.with(context)
+//                        .load(uri.toString())
+//                        .into(imageView);
+//            }
+//        }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                Log.e("ERRO", "AQ");
+//            }
+//        });
     }
 }
