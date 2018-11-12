@@ -15,10 +15,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/nome_grupo"
+                android:text="Grupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/grupo_categoria"
+                android:text="Categoria"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

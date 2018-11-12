@@ -53,7 +53,7 @@ public class CleroAdapter extends RecyclerView.Adapter {
         final Clero clero = cleroList.get(position);
 
         cleroViewHolder.nome.setText(clero.getNome());
-        IHSUtil.handleImage(cleroViewHolder.image, clero, context);
+        IHSUtil.handleImage(cleroViewHolder.image, clero);
 
     }
 

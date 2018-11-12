@@ -8,10 +8,14 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GrupoDAOImpl {
 
-    public void getAll(ChildEventListener mChildEventListener, DatabaseReference databaseReference, final GrupoAdapter adapter) {
+    public void getAll(ChildEventListener mChildEventListener, Query query, final GrupoAdapter adapter) {
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -35,6 +39,6 @@ public class GrupoDAOImpl {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        databaseReference.addChildEventListener(mChildEventListener);
+        query.addChildEventListener(mChildEventListener);
     }
 }

@@ -15,4 +15,7 @@
     <string name="como_chegar">Como chegar?</string>
     <string name="taxas">Taxas e Emolumentos</string>
     <string name="fechar">Fechar</string>
+    <string name="data_nascimento_modal">Data Nascimento:</string>
+    <string name="data_ordenacao_modal">Data Ordenação:</string>
+    <string name="cargo_titulo_modal">Cargo/Título:</string>
 </resources>

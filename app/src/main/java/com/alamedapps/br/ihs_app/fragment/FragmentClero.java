@@ -30,7 +30,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class FragmentClero extends Fragment {
 
-
     private View v;
     private RecyclerView recyclerView;
 
@@ -39,8 +38,6 @@ public class FragmentClero extends Fragment {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
-
-    private Clero clero;
 
     private ImageView imageView;
 
@@ -71,13 +68,12 @@ public class FragmentClero extends Fragment {
         recyclerView.addOnItemTouchListener(new IHSRecyclerView(getActivity(), recyclerView, new IHSRecyclerView.ItemTouch() {
             @Override
             public void clickSimples(View view, int position) {
-                String cargo = cleroAdapter.getCleroList().get(position).getCargoTitulo();
                 new MaterialDialog.Builder(getContext())
                         .title(cleroAdapter.getCleroList().get(position).getNome())
-                        .content("Data Nascimento:" + " " + cleroAdapter.getCleroList().get(position).getDataNascimento() + "\n" +
-                                "Data Ordenação: " + " " + cleroAdapter.getCleroList().get(position).getDataOrdenacao() + "\n" +
-                                "Cargo/Título: " + " " + cleroAdapter.getCleroList().get(position).getCargoTitulo() + "\n"
-
+                        .content(
+                                getString(R.string.data_nascimento_modal) + " " + cleroAdapter.getCleroList().get(position).getDataNascimento() + "\n" +
+                                getString(R.string.data_ordenacao_modal) + " " + cleroAdapter.getCleroList().get(position).getDataOrdenacao() + "\n" +
+                                getString(R.string.cargo_titulo_modal) + " " + cleroAdapter.getCleroList().get(position).getCargoTitulo() + "\n"
                         )
                         .positiveText(R.string.fechar)
                         .show();
