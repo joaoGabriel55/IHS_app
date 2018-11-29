@@ -2,11 +2,13 @@ package com.alamedapps.br.ihs_app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -31,8 +33,13 @@ import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.CategoriaGrupo;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.Grupo;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -50,6 +57,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         //preencheLocal();
+        //testeSet();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -158,24 +166,24 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void preencheLocal() {
+   private void testeSet(){
 
-        databaseReference = IHSUtil.getDatabase().getReference().child("taxasEmolumentos");
+        TaxasEmolumentos t1 = new TaxasEmolumentos(1, "Intenções Gerais", 2.0);
 
-        TaxasEmolumentos t1 = new TaxasEmolumentos(1, "Intenções Gerais", 5.00);
-        TaxasEmolumentos t2 = new TaxasEmolumentos(2, "Batizado", 35.00);
-        TaxasEmolumentos t3 = new TaxasEmolumentos(3, "Crisma", 20.00);
-        TaxasEmolumentos t4 = new TaxasEmolumentos(4, "Casamento Religioso", 100.00);
-        TaxasEmolumentos t5 = new TaxasEmolumentos(5, "Casamento Religioso com Efeito Civil", 120.00);
-        TaxasEmolumentos t6 = new TaxasEmolumentos(6, "Certidão de Batismo e Casamento", 40.00);
-        TaxasEmolumentos t7 = new TaxasEmolumentos(7, "Taxa do dízimo paroquial mensal é igual a 10% do salário.", 0.0);
-
-        databaseReference.push().setValue(t1);
-        databaseReference.push().setValue(t2);
-        databaseReference.push().setValue(t3);
-        databaseReference.push().setValue(t4);
-        databaseReference.push().setValue(t5);
-        databaseReference.push().setValue(t6);
-        databaseReference.push().setValue(t7);
-    }
+       IHSUtil.getDatabase().getReference("taxasEmolumentos").child("-LIqma6OBSFGzEpgw6J4").setValue(t1)
+               .addOnSuccessListener(new OnSuccessListener<Void>() {
+                   @Override
+                   public void onSuccess(Void aVoid) {
+                       // Write was successful!
+                       // ...
+                   }
+               })
+               .addOnFailureListener(new OnFailureListener() {
+                   @Override
+                   public void onFailure(@NonNull Exception e) {
+                       // Write failed
+                       // ...
+                   }
+               });
+   }
 }

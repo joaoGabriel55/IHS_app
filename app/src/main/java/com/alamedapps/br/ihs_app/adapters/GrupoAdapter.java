@@ -87,11 +87,13 @@ public class GrupoAdapter extends RecyclerView.Adapter {
 
         if (itemViewType == GROUP_TYPE) {
             grupoViewHolder.nome.setText(grupo.getNome());
+            grupoViewHolder.reuniao.setText(grupo.getReuniao());
         } else {
-            grupoViewHolder.nome.setText(grupo.getNome());
             String categFormatted = FormatterUtils.firstLetterUppercase(grupo.getCategoriaGrupo().toString());
             grupoViewHolder.categoria.setText(categFormatted);
 
+            grupoViewHolder.nome.setText(grupo.getNome());
+            grupoViewHolder.reuniao.setText(grupo.getReuniao());
         }
 
 

@@ -8,48 +8,13 @@
         android:id="@+id/grupo_categoria_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_margin="8dp"
         android:fontFamily="@font/google_new_font"
         android:text="Hoje"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
         android:textSize="16sp" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/layout_grupo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            app:cardCornerRadius="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/nome_grupo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Grupo" />
-
-                <TextView
-                    android:id="@+id/grupo_categoria"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Categoria" />
-
-            </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-    </LinearLayout>
+    <include layout="@layout/layout_grupo" />
 
 </LinearLayout>
