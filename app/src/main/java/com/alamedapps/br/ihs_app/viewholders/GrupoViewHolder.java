@@ -1,17 +1,19 @@
 package com.alamedapps.br.ihs_app.viewholders;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.alamedapps.br.ihs_app.R;
+import com.alamedapps.br.ihs_app.models.igrejaemacao.CategoriaGrupo;
 
-public class GrupoViewHolder extends RecyclerView.ViewHolder{
+public class GrupoViewHolder extends RecyclerView.ViewHolder {
 
-    public final TextView nome;
-    public final TextView categoria;
+    public TextView nome;
+    public TextView categoria;
     //public final TextView descricao;
-    public final TextView reuniao;
+    public TextView reuniao;
 
 
     public GrupoViewHolder(View itemView) {

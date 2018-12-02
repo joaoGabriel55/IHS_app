@@ -7,5 +7,7 @@
 .DS_Store
 /build
 /captures
+/src/debug/res/values
+/src/release/res/values
 .externalNativeBuild
 google-services.json

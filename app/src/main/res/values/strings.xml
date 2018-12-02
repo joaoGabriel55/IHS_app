@@ -18,4 +18,5 @@
     <string name="data_nascimento_modal">Data Nascimento:</string>
     <string name="data_ordenacao_modal">Data Ordenação:</string>
     <string name="cargo_titulo_modal">Cargo/Título:</string>
+    <string name="search">Search</string>
 </resources>

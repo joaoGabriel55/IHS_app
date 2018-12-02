@@ -3,6 +3,7 @@ package com.alamedapps.br.ihs_app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -32,6 +33,7 @@ import com.alamedapps.br.ihs_app.models.Secretaria;
 import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.CategoriaGrupo;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.Grupo;
+import com.alamedapps.br.ihs_app.testSearchRecycler.TestSearch;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -48,14 +50,15 @@ public class MainActivity extends AppCompatActivity
 
     private DatabaseReference databaseReference;
     private Fragment fragment;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         //preencheLocal();
         //testeSet();
 
@@ -100,11 +103,18 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_search) {
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        menuItem.setVisible(false);
+        return true;
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -116,10 +126,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     private void displaySelectedScreen(int itemId, MenuItem item) {
 
         //creating fragment object
         fragment = null;
+
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_home:
@@ -133,8 +145,11 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_igreja_acao:
                 fragment = new FragmentGrupo();
+//                Intent intent = new Intent(this, TestSearch.class);
+//                startActivity(intent);
                 break;
             case R.id.nav_taxas:
+
                 fragment = new FragmentTaxas();
                 break;
             case R.id.nav_map:
@@ -166,24 +181,24 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-   private void testeSet(){
+    private void testeSet() {
 
         TaxasEmolumentos t1 = new TaxasEmolumentos(1, "Intenções Gerais", 2.0);
 
-       IHSUtil.getDatabase().getReference("taxasEmolumentos").child("-LIqma6OBSFGzEpgw6J4").setValue(t1)
-               .addOnSuccessListener(new OnSuccessListener<Void>() {
-                   @Override
-                   public void onSuccess(Void aVoid) {
-                       // Write was successful!
-                       // ...
-                   }
-               })
-               .addOnFailureListener(new OnFailureListener() {
-                   @Override
-                   public void onFailure(@NonNull Exception e) {
-                       // Write failed
-                       // ...
-                   }
-               });
-   }
+        IHSUtil.getDatabase().getReference("taxasEmolumentos").child("-LIqma6OBSFGzEpgw6J4").setValue(t1)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        // ...
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                    }
+                });
+    }
 }

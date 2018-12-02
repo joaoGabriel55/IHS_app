@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Secretaria;
@@ -21,21 +23,29 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 
-public class GrupoAdapter extends RecyclerView.Adapter {
+public class GrupoAdapter extends RecyclerView.Adapter implements Filterable{
 
     private static final int GROUP_TYPE = 1;
     private static final int HEADER_TYPE = 2;
 
     private List<Grupo> grupoList;
+    private List<Grupo> grupoListFull;
+
     private Context context;
 
     public GrupoAdapter(List<Grupo> grupoList, Context context) {
         if (grupoList != null) {
             this.grupoList = grupoList;
+            grupoListFull = new ArrayList<>(grupoList);
         } else {
             this.grupoList = new ArrayList<>();
         }
         this.context = context;
+    }
+
+    public GrupoAdapter(List<Grupo> grupoList) {
+        this.grupoList = grupoList;
+        grupoListFull = new ArrayList<>(grupoList);
     }
 
     public void add(Grupo grupo) {
@@ -129,4 +139,47 @@ public class GrupoAdapter extends RecyclerView.Adapter {
         return type;
     }
 
+    public List<Grupo> getGrupoList() {
+        return grupoList;
+    }
+
+    public void setGrupoList(List<Grupo> grupoList) {
+        this.grupoList = grupoList;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Grupo> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(grupoListFull);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Grupo item : grupoListFull) {
+                    if (item.getNome().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            grupoList.clear();
+            grupoList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 }
