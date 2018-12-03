@@ -23,29 +23,23 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.List;
 
-public class GrupoAdapter extends RecyclerView.Adapter implements Filterable{
+public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
 
     private static final int GROUP_TYPE = 1;
     private static final int HEADER_TYPE = 2;
 
     private List<Grupo> grupoList;
-    private List<Grupo> grupoListFull;
+    private List<Grupo> grupoListFilted;
 
     private Context context;
 
     public GrupoAdapter(List<Grupo> grupoList, Context context) {
         if (grupoList != null) {
             this.grupoList = grupoList;
-            grupoListFull = new ArrayList<>(grupoList);
         } else {
             this.grupoList = new ArrayList<>();
         }
         this.context = context;
-    }
-
-    public GrupoAdapter(List<Grupo> grupoList) {
-        this.grupoList = grupoList;
-        grupoListFull = new ArrayList<>(grupoList);
     }
 
     public void add(Grupo grupo) {
@@ -106,6 +100,10 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable{
             grupoViewHolder.reuniao.setText(grupo.getReuniao());
         }
 
+        if(grupo.getReuniao() == null){
+            grupoViewHolder.reuniao.setVisibility(View.GONE);
+        }
+
 
     }
 
@@ -129,7 +127,7 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable{
 
             }
         } else {
-            if (grupoList.get(position).getCategoriaGrupo() == grupoList.get(position - 1).getCategoriaGrupo())
+            if (grupoList.size() > 1 && (grupoList.get(position).getCategoriaGrupo() == grupoList.get(position - 1).getCategoriaGrupo()))
                 type = GROUP_TYPE;
             else
                 type = HEADER_TYPE;
@@ -149,37 +147,39 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable{
 
     @Override
     public Filter getFilter() {
-        return exampleFilter;
-    }
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                String text = constraint.toString();
 
-    private Filter exampleFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            List<Grupo> filteredList = new ArrayList<>();
-
-            if (constraint == null || constraint.length() == 0) {
-                filteredList.addAll(grupoListFull);
-            } else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (Grupo item : grupoListFull) {
-                    if (item.getNome().toLowerCase().contains(filterPattern)) {
-                        filteredList.add(item);
+                if (text.isEmpty()) {
+                    grupoListFilted = grupoList;
+                } else {
+                    List<Grupo> filtedList = new ArrayList<>();
+                    for (Grupo grupo : grupoList) {
+                        if (grupo.getNome().toLowerCase().contains(text))
+                            filtedList.add(grupo);
                     }
+                    grupoListFilted = filtedList;
+
+                }
+
+                FilterResults filterResults = new FilterResults();
+
+                if(text == "") {
+                    filterResults.values = grupoList;
+                    return filterResults;
+                } else {
+                    filterResults.values = grupoListFilted;
+                    return filterResults;
                 }
             }
 
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-
-            return results;
-        }
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            grupoList.clear();
-            grupoList.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                grupoList = (ArrayList<Grupo>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
 }

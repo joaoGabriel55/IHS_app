@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -19,8 +20,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.alamedapps.br.ihs_app.activity.MapActivity;
+import com.alamedapps.br.ihs_app.adapters.EventoAdapter;
 import com.alamedapps.br.ihs_app.fragment.FragmentClero;
 import com.alamedapps.br.ihs_app.fragment.FragmentEvento;
 import com.alamedapps.br.ihs_app.fragment.FragmentGrupo;
@@ -33,7 +36,6 @@ import com.alamedapps.br.ihs_app.models.Secretaria;
 import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.CategoriaGrupo;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.Grupo;
-import com.alamedapps.br.ihs_app.testSearchRecycler.TestSearch;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -52,6 +54,10 @@ public class MainActivity extends AppCompatActivity
     private Fragment fragment;
     private Toolbar toolbar;
 
+    private FragmentGrupo fragmentGrupo;
+    private SearchView searchView;
+    private MenuItem item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,10 @@ public class MainActivity extends AppCompatActivity
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        item = findViewById(R.id.action_search);
+
+        //fragmentGrupo = new FragmentGrupo();
         //preencheLocal();
         //testeSet();
 
@@ -92,17 +102,53 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        item = menu.findItem(R.id.action_search);
+
+        searchView = (SearchView) item.getActionView();
+        searchView.setVisibility(View.GONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (fragment instanceof FragmentGrupo) {
+                    fragmentGrupo = (FragmentGrupo) fragment;
+                    fragmentGrupo.getGrupoAdapter().getFilter().filter(newText);
+                }
+                return false;
+            }
+        });
+
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                if (fragment instanceof FragmentGrupo) {
+                    fragment = new FragmentGrupo();
+                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    ft.replace(R.id.fragmentLayout, fragment);
+                    ft.commit();
+                }
+                return false;
+            }
+        });
+
         return true;
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             return true;
         }
@@ -110,19 +156,17 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuItem = menu.findItem(R.id.action_search);
-        menuItem.setVisible(false);
-        return true;
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        displaySelectedScreen(item.getItemId(), item);
+        if(item.getItemId() ==  R.id.nav_igreja_acao) {
+            searchView.setVisibility(View.VISIBLE);
+        } else {
+            searchView.setVisibility(View.GONE);
+        }
 
+        displaySelectedScreen(item.getItemId(), item);
         return true;
     }
 
@@ -145,11 +189,8 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_igreja_acao:
                 fragment = new FragmentGrupo();
-//                Intent intent = new Intent(this, TestSearch.class);
-//                startActivity(intent);
                 break;
             case R.id.nav_taxas:
-
                 fragment = new FragmentTaxas();
                 break;
             case R.id.nav_map:
