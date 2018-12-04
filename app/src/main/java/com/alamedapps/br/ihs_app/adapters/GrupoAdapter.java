@@ -100,10 +100,9 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
             grupoViewHolder.reuniao.setText(grupo.getReuniao());
         }
 
-        if(grupo.getReuniao() == null){
+        if (grupo.getReuniao() == null) {
             grupoViewHolder.reuniao.setVisibility(View.GONE);
         }
-
 
     }
 
@@ -137,42 +136,36 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
         return type;
     }
 
-    public List<Grupo> getGrupoList() {
-        return grupoList;
-    }
-
-    public void setGrupoList(List<Grupo> grupoList) {
-        this.grupoList = grupoList;
-    }
 
     @Override
     public Filter getFilter() {
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
-                String text = constraint.toString();
 
-                if (text.isEmpty()) {
+                List<Grupo> filteredList = new ArrayList<>();
+
+                if (constraint == null || constraint.length() == 0) {
                     grupoListFilted = grupoList;
+                    filteredList.addAll(grupoListFilted);
                 } else {
-                    List<Grupo> filtedList = new ArrayList<>();
-                    for (Grupo grupo : grupoList) {
-                        if (grupo.getNome().toLowerCase().contains(text))
-                            filtedList.add(grupo);
+                    String filterPattern = constraint.toString().toLowerCase().trim();
+
+                    if (grupoListFilted == null)
+                        grupoListFilted = grupoList;
+
+                    for (Grupo item : grupoListFilted) {
+                        if (item.getNome().toLowerCase().contains(filterPattern)) {
+                            filteredList.add(item);
+                        }
                     }
-                    grupoListFilted = filtedList;
-
                 }
 
-                FilterResults filterResults = new FilterResults();
+                FilterResults results = new FilterResults();
+                results.values = filteredList;
 
-                if(text == "") {
-                    filterResults.values = grupoList;
-                    return filterResults;
-                } else {
-                    filterResults.values = grupoListFilted;
-                    return filterResults;
-                }
+                return results;
+
             }
 
             @Override
@@ -181,5 +174,13 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
                 notifyDataSetChanged();
             }
         };
+    }
+
+    public List<Grupo> getGrupoList() {
+        return grupoList;
+    }
+
+    public List<Grupo> getGrupoListFilted() {
+        return grupoListFilted;
     }
 }

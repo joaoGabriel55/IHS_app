@@ -8,6 +8,7 @@ import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,6 +54,8 @@ public class FragmentGrupo extends Fragment {
 
     private GrupoAdapter grupoAdapter;
 
+    private ConstraintLayout layoutNotFound;
+
     private SearchView searchView = null;
     private SearchView.OnQueryTextListener queryTextListener;
 
@@ -60,8 +63,9 @@ public class FragmentGrupo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_grupo, container, false);
 
+        layoutNotFound = v.findViewById(R.id.not_found_screen);
 
-        loadData();
+        //loadData();
 
 //        recyclerViewGrupo.addOnItemTouchListener(new IHSRecyclerView(getActivity(), recyclerView, new IHSRecyclerView.ItemTouch() {
 //            @Override
@@ -96,7 +100,23 @@ public class FragmentGrupo extends Fragment {
         getActivity().setTitle(R.string.pastorais_movimentos);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadData();
+    }
+
     public GrupoAdapter getGrupoAdapter() {
         return this.grupoAdapter;
+    }
+
+    public void checkFiltedListSize(List<Grupo> grupoListFilted) {
+        if (grupoListFilted == null || grupoListFilted.size() == 0) {
+            layoutNotFound.setVisibility(View.VISIBLE);
+            recyclerViewGrupo.setVisibility(View.GONE);
+        } else {
+            layoutNotFound.setVisibility(View.GONE);
+            recyclerViewGrupo.setVisibility(View.VISIBLE);
+        }
     }
 }

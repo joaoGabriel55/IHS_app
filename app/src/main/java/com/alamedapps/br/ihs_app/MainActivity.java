@@ -119,6 +119,17 @@ public class MainActivity extends AppCompatActivity
                 if (fragment instanceof FragmentGrupo) {
                     fragmentGrupo = (FragmentGrupo) fragment;
                     fragmentGrupo.getGrupoAdapter().getFilter().filter(newText);
+
+                    if (newText.length() == 0) {
+                        fragment = new FragmentGrupo();
+                        loadFragment(fragment);
+                    }
+
+                    if (fragmentGrupo.getGrupoAdapter().getGrupoList() == null) {
+                        fragmentGrupo.checkFiltedListSize(fragmentGrupo.getGrupoAdapter().getGrupoList());
+                    } else {
+                        fragmentGrupo.checkFiltedListSize(fragmentGrupo.getGrupoAdapter().getGrupoList());
+                    }
                 }
                 return false;
             }
@@ -129,9 +140,7 @@ public class MainActivity extends AppCompatActivity
             public boolean onClose() {
                 if (fragment instanceof FragmentGrupo) {
                     fragment = new FragmentGrupo();
-                    FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.fragmentLayout, fragment);
-                    ft.commit();
+                    loadFragment(fragment);
                 }
                 return false;
             }
@@ -160,7 +169,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
 
-        if(item.getItemId() ==  R.id.nav_igreja_acao) {
+        if (item.getItemId() == R.id.nav_igreja_acao) {
             searchView.setVisibility(View.VISIBLE);
         } else {
             searchView.setVisibility(View.GONE);
@@ -203,13 +212,17 @@ public class MainActivity extends AppCompatActivity
 
         //replacing the fragment
         if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.fragmentLayout, fragment);
-            ft.commit();
+            loadFragment(fragment);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    public void loadFragment(Fragment fragment) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragmentLayout, fragment);
+        ft.commit();
     }
 
     private void showHome() {
