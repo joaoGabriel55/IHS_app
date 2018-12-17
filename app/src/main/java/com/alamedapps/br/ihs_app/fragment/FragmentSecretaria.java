@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -45,6 +47,8 @@ public class FragmentSecretaria extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_secretaria, container, false);
 
+        setHasOptionsMenu(true);
+
         mDatabaseReference = mFirebaseDatabase.getReference().child("secretaria");
 
         recyclerView = v.findViewById(R.id.recyclerviewSecretaria);
@@ -67,5 +71,13 @@ public class FragmentSecretaria extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
         getActivity().setTitle(R.string.secretaria);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        menuItem.setVisible(false);
     }
 }

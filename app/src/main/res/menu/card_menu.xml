@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/descricao_item"
+        android:title="@string/descricao_card_op" />
+    <item
+        android:id="@+id/documentos_item"
+        android:title="@string/documentos_card_op" />
+    <item
+        android:id="@+id/coodernadores_item"
+        android:title="@string/coordenadores_card_op" />
+
+</menu>

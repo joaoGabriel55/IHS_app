@@ -73,8 +73,9 @@ public class FragmentEvento extends Fragment {
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
         MenuItem menuItem = menu.findItem(R.id.action_search);
         menuItem.setVisible(false);
-        super.onPrepareOptionsMenu(menu);
     }
 }

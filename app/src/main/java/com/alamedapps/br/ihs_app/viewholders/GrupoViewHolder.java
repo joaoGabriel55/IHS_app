@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alamedapps.br.ihs_app.R;
@@ -13,10 +14,12 @@ public class GrupoViewHolder extends RecyclerView.ViewHolder {
 
     public TextView nome;
     public TextView categoria;
-    //public final TextView descricao;
+    public TextView descricao;
     public TextView reuniao;
     public ConstraintLayout layoutNotFound;
     public RecyclerView recyclerView;
+    public ImageView menuCard;
+
 
 
     public GrupoViewHolder(View itemView) {
@@ -25,6 +28,7 @@ public class GrupoViewHolder extends RecyclerView.ViewHolder {
         nome = itemView.findViewById(R.id.nome_grupo);
         categoria = itemView.findViewById(R.id.grupo_categoria_header);
         //descricao = itemView.findViewById(R.id.grupo_categoria_header);
+        menuCard = itemView.findViewById(R.id.menu_card_grupo);
         reuniao = itemView.findViewById(R.id.reuniao_grupo);
 
     }

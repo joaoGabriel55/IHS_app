@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.Toast;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Secretaria;
@@ -100,9 +103,39 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
             grupoViewHolder.reuniao.setText(grupo.getReuniao());
         }
 
-        if (grupo.getReuniao() == null) {
-            grupoViewHolder.reuniao.setVisibility(View.GONE);
-        }
+        grupoViewHolder.menuCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(context, grupoViewHolder.menuCard);
+                popupMenu.inflate(R.menu.card_menu);
+
+                if(grupo.getReuniao().length() == 0)
+                    popupMenu.getMenu().getItem(0).setVisible(false);
+
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.descricao_item:
+                                Toast.makeText(context, grupo.getId() + "", Toast.LENGTH_LONG).show();
+                                break;
+                            case R.id.documentos_item:
+                                Toast.makeText(context, grupo.getId() + "", Toast.LENGTH_LONG).show();
+                                break;
+                            case R.id.coodernadores_item:
+                                Toast.makeText(context, grupo.getId() + "", Toast.LENGTH_LONG).show();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
+
+//        if (grupo.getReuniao().length() == 0) {
+//            grupoViewHolder.reuniao.setVisibility(View.GONE);
+//        }
 
     }
 

@@ -19,4 +19,7 @@
     <string name="data_ordenacao_modal">Data Ordenação:</string>
     <string name="cargo_titulo_modal">Cargo/Título:</string>
     <string name="search">Search</string>
+    <string name="descricao_card_op">Descrição</string>
+    <string name="documentos_card_op">Documentos</string>
+    <string name="coordenadores_card_op">Coordenadores</string>
 </resources>
