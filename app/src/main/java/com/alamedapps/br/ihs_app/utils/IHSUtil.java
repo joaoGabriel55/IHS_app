@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Clero;
 import com.bumptech.glide.Glide;
@@ -19,6 +20,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class IHSUtil {
 
@@ -47,5 +51,21 @@ public class IHSUtil {
                 .using(new FirebaseImageLoader())
                 .load(storageRef)
                 .into(imageView);
+    }
+
+    public static void generateModalInfo(String title, String content, Context context) {
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .content(content)
+                .positiveText(R.string.fechar)
+                .show();
+    }
+
+    public static String formatList(List<String> listToString) {
+
+        String teste2 = listToString.toString().replace("[", "");
+        String teste3 = teste2.replace("]", "");
+
+        return teste2;
     }
 }

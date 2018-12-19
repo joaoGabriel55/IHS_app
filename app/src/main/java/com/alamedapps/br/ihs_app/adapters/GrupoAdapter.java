@@ -14,11 +14,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Secretaria;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.CategoriaGrupo;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.Grupo;
 import com.alamedapps.br.ihs_app.utils.FormatterUtils;
+import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.alamedapps.br.ihs_app.viewholders.GrupoViewHolder;
 import com.alamedapps.br.ihs_app.viewholders.SecretariaViewHolder;
 
@@ -30,6 +32,11 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
 
     private static final int GROUP_TYPE = 1;
     private static final int HEADER_TYPE = 2;
+
+    //Constantes de cada item do popup menu do card de cada movimento.
+    private static final int DESCRICAO = 0;
+    private static final int DOCUMENTOS = 1;
+    private static final int COORDENADORES = 2;
 
     private List<Grupo> grupoList;
     private List<Grupo> grupoListFilted;
@@ -75,7 +82,6 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
                 //GrupoViewHolder grupoViewHolder = new GrupoViewHolder(v);
                 return new GrupoViewHolder(v);
 
-
         }
 
 
@@ -103,24 +109,44 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
             grupoViewHolder.reuniao.setText(grupo.getReuniao());
         }
 
+        popMenuCardGenerate(grupoViewHolder, grupo);
+
+//        if (grupo.getReuniao().length() == 0) {
+//            grupoViewHolder.reuniao.setVisibility(View.GONE);
+//        }
+    }
+
+    public void popMenuCardGenerate(final GrupoViewHolder grupoViewHolder, final Grupo grupo) {
         grupoViewHolder.menuCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, grupoViewHolder.menuCard);
                 popupMenu.inflate(R.menu.card_menu);
 
-                if(grupo.getReuniao().length() == 0)
-                    popupMenu.getMenu().getItem(0).setVisible(false);
+
+                if (grupo.getDescricao().length() == 0)
+                    popupMenu.getMenu().getItem(DESCRICAO).setVisible(false);
+
+                if (grupo.getDocumentos() == null)
+                    popupMenu.getMenu().getItem(DOCUMENTOS).setVisible(false);
+                else {
+                    String title = popupMenu.getMenu().getItem(DOCUMENTOS).getTitle().toString();
+                    popupMenu.getMenu().getItem(DOCUMENTOS).setTitle(title + " (" + grupo.getDocumentos().size() + ")");
+                }
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.descricao_item:
-                                Toast.makeText(context, grupo.getId() + "", Toast.LENGTH_LONG).show();
+                                IHSUtil.generateModalInfo(grupo.getNome(), grupo.getDescricao(), context);
                                 break;
                             case R.id.documentos_item:
-                                Toast.makeText(context, grupo.getId() + "", Toast.LENGTH_LONG).show();
+                                new MaterialDialog.Builder(context)
+                                        .title(context.getString(R.string.docs_modal_label) + " " + grupo.getNome())
+                                        .items(grupo.getDocumentos())
+                                        .positiveText(R.string.fechar)
+                                        .show();
                                 break;
                             case R.id.coodernadores_item:
                                 Toast.makeText(context, grupo.getId() + "", Toast.LENGTH_LONG).show();
@@ -132,11 +158,6 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
                 popupMenu.show();
             }
         });
-
-//        if (grupo.getReuniao().length() == 0) {
-//            grupoViewHolder.reuniao.setVisibility(View.GONE);
-//        }
-
     }
 
     @Override

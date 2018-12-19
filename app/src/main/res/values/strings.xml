@@ -22,4 +22,5 @@
     <string name="descricao_card_op">Descrição</string>
     <string name="documentos_card_op">Documentos</string>
     <string name="coordenadores_card_op">Coordenadores</string>
+    <string name="docs_modal_label">Documentos</string>
 </resources>
