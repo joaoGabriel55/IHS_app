@@ -65,7 +65,7 @@ public class FragmentGrupo extends Fragment {
 
         layoutNotFound = v.findViewById(R.id.not_found_screen);
 
-        //loadData();
+        loadData();
 
 //        recyclerViewGrupo.addOnItemTouchListener(new IHSRecyclerView(getActivity(), recyclerView, new IHSRecyclerView.ItemTouch() {
 //            @Override

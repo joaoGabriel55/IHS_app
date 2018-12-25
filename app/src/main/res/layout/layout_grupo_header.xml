@@ -10,10 +10,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:fontFamily="@font/google_new_font"
-        android:text="Hoje"
+        android:text="Categoria"
         android:textAllCaps="false"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp" />
+        android:textSize="18sp" />
 
     <include layout="@layout/layout_grupo" />
 

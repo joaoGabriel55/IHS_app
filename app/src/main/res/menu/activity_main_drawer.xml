@@ -22,7 +22,7 @@
             android:title="Igreja em Ação" />
 
         <item
-            android:id="@+id/nav_comuninade"
+            android:id="@+id/nav_comunidade"
             android:icon="@drawable/ic_community"
             android:title="Comunidade" />
 

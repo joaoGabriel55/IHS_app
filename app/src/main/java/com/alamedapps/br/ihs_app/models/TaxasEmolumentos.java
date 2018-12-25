@@ -6,6 +6,7 @@ public class TaxasEmolumentos {
     private String nome;
     private Double valor;
 
+
     public TaxasEmolumentos() {
     }
 

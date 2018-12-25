@@ -15,6 +15,7 @@ public class GrupoViewHolder extends RecyclerView.ViewHolder {
     public TextView nome;
     public TextView categoria;
     public TextView descricao;
+    public TextView reuniao_label;
     public TextView reuniao;
     public ConstraintLayout layoutNotFound;
     public RecyclerView recyclerView;
@@ -29,6 +30,7 @@ public class GrupoViewHolder extends RecyclerView.ViewHolder {
         categoria = itemView.findViewById(R.id.grupo_categoria_header);
         //descricao = itemView.findViewById(R.id.grupo_categoria_header);
         menuCard = itemView.findViewById(R.id.menu_card_grupo);
+        reuniao_label = itemView.findViewById(R.id.reuniao_grupo_label);
         reuniao = itemView.findViewById(R.id.reuniao_grupo);
 
     }

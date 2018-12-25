@@ -1,16 +1,10 @@
 package com.alamedapps.br.ihs_app;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,32 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.alamedapps.br.ihs_app.activity.MapActivity;
-import com.alamedapps.br.ihs_app.adapters.EventoAdapter;
 import com.alamedapps.br.ihs_app.fragment.FragmentClero;
+import com.alamedapps.br.ihs_app.fragment.FragmentComunidade;
 import com.alamedapps.br.ihs_app.fragment.FragmentEvento;
 import com.alamedapps.br.ihs_app.fragment.FragmentGrupo;
 import com.alamedapps.br.ihs_app.fragment.FragmentMap;
+import com.alamedapps.br.ihs_app.fragment.FragmentReligiosidade;
 import com.alamedapps.br.ihs_app.fragment.FragmentSecretaria;
 import com.alamedapps.br.ihs_app.fragment.FragmentTaxas;
-import com.alamedapps.br.ihs_app.models.Clero;
-import com.alamedapps.br.ihs_app.models.Evento;
-import com.alamedapps.br.ihs_app.models.Secretaria;
 import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
-import com.alamedapps.br.ihs_app.models.igrejaemacao.CategoriaGrupo;
-import com.alamedapps.br.ihs_app.models.igrejaemacao.Grupo;
+import com.alamedapps.br.ihs_app.models.religiosidade.Oracao;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -69,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         item = findViewById(R.id.action_search);
 
         //fragmentGrupo = new FragmentGrupo();
-        //preencheLocal();
+        //preencheDados();
         //testeSet();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -199,6 +182,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_igreja_acao:
                 fragment = new FragmentGrupo();
                 break;
+            case R.id.nav_comunidade:
+                fragment = new FragmentComunidade();
+                break;
+            case R.id.nav_religiosidade:
+                fragment = new FragmentReligiosidade();
+                break;
             case R.id.nav_taxas:
                 fragment = new FragmentTaxas();
                 break;
@@ -233,6 +222,42 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.fragmentLayout, fragment);
             ft.commit();
         }
+    }
+
+    private void preencheDados() {
+
+        databaseReference = IHSUtil.getDatabase().getReference().child("religiosidade");
+
+        Oracao oracao1 = new Oracao(1, "Oração a Nossa Senhora da Esperança (Padroeira)", "Senhora da Esperança, tua alegria era fazer a vontade do Pai.\n" +
+                "Tua vida era estar atenta às necessidades dos outros.\n" +
+                "Intercede por nós!\n" +
+                "Quando nossa fé vacilar, quando somos tentados a desesperar.\n" +
+                "Senhora da Esperança, intercede por nós!\n" +
+                "Quando fechamos o coração, quando consentimos à injustiça.\n" +
+                "Senhora da Esperança, intercede por nós!\n" +
+                "Quando parece ser difícil seguir teu filho, quando nos cansamos de fazer o bem.\n" +
+                " Senhora da Esperança, intercede por nós!\n" +
+                "Quando o não se antecipa ao nosso sim.\n" +
+                " Senhora da Esperança, leva-nos a Jesus Cristo, nossa esperança.\n" +
+                "Amém.");
+
+        Oracao oracao2 = new Oracao(2, "Oração de Santo Inácio de Loyola (Co-padroeiro)", "Oração de Santo Inácio de Loyola\n" +
+                "Tomai, Senhor, e recebei\n" +
+                "Toda a minha liberdade,\n" +
+                "A minha memória,\n" +
+                "O meu entendimento,\n" +
+                "E toda a minha vontade.\n" +
+                "Tudo o que tenho e possuo, de vós, Senhor, o recebi.\n" +
+                "A Vós, Senhor, o entrego e restituo.\n" +
+                "Para que disponhais de tudo\n" +
+                "Segundo a vossa Santíssima vontade.\n" +
+                "Dai-me o vosso amor e vossa graça e isto me basta. \n" +
+                "Nenhuma outra coisa desejo,\n" +
+                "de Vossa misericórdia infinita,\n" +
+                "Amém.");
+
+        databaseReference.push().setValue(oracao1);
+        databaseReference.push().setValue(oracao2);
     }
 
     private void testeSet() {

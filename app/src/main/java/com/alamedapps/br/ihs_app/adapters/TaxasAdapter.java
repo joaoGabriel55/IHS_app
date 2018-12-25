@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alamedapps.br.ihs_app.R;
-import com.alamedapps.br.ihs_app.models.Clero;
 import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
-import com.alamedapps.br.ihs_app.viewholders.CleroViewHolder;
 import com.alamedapps.br.ihs_app.viewholders.TaxasViewHolder;
 
 import java.util.ArrayList;
@@ -20,9 +18,9 @@ public class TaxasAdapter extends RecyclerView.Adapter {
     private List<TaxasEmolumentos> taxasEmolumentosList;
     private Context context;
 
-    public TaxasAdapter(List<TaxasEmolumentos> taxasEmolumentosList, Context context) {
-        if (taxasEmolumentosList != null) {
-            this.taxasEmolumentosList = taxasEmolumentosList;
+    public TaxasAdapter(List<TaxasEmolumentos> oracaoList, Context context) {
+        if (oracaoList != null) {
+            this.taxasEmolumentosList = oracaoList;
         } else {
             this.taxasEmolumentosList = new ArrayList<>();
         }
@@ -49,6 +47,12 @@ public class TaxasAdapter extends RecyclerView.Adapter {
         final TaxasEmolumentos taxasEmolumentos = taxasEmolumentosList.get(position);
 
         taxasViewHolder.nome.setText(taxasEmolumentos.getNome());
+        if (taxasEmolumentos.getValor() <= 0.0) {
+            taxasViewHolder.valorField.setVisibility(View.GONE);
+        } else {
+            taxasViewHolder.valorField.setVisibility(View.VISIBLE);
+            taxasViewHolder.valor.setText(taxasEmolumentos.getValor().toString() + "0");
+        }
 
     }
 

@@ -22,6 +22,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class IHSUtil {
@@ -57,6 +58,14 @@ public class IHSUtil {
         new MaterialDialog.Builder(context)
                 .title(title)
                 .content(content)
+                .positiveText(R.string.fechar)
+                .show();
+    }
+
+    public static void generateModalInfoListItems(String title, Collection<String> items, Context context){
+        new MaterialDialog.Builder(context)
+                .title(title)
+                .items(items)
                 .positiveText(R.string.fechar)
                 .show();
     }

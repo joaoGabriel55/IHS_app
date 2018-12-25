@@ -6,6 +6,9 @@ public class Oracao {
     private String nome;
     private String letra;
 
+    public Oracao() {
+    }
+
     public Oracao(int id, String nome, String letra) {
         this.id = id;
         this.nome = nome;

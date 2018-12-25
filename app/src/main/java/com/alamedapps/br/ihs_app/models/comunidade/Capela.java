@@ -5,6 +5,7 @@ import java.util.List;
 public class Capela {
 
     private int id;
+    private String nome;
     private String dataFestaPadroeiro;
     private List<String> horarios;
     private String batismoReunicoes;
@@ -12,8 +13,12 @@ public class Capela {
     private String celebracao;
     private String endereco;
 
-    public Capela(int id, String dataFestaPadroeiro, List<String> horarios, String batismoReunicoes, String batizadosHorario, String celebracao, String endereco) {
+    public Capela() {
+    }
+
+    public Capela(int id, String nome, String dataFestaPadroeiro, List<String> horarios, String batismoReunicoes, String batizadosHorario, String celebracao, String endereco) {
         this.id = id;
+        this.nome = nome;
         this.dataFestaPadroeiro = dataFestaPadroeiro;
         this.horarios = horarios;
         this.batismoReunicoes = batismoReunicoes;
@@ -30,20 +35,28 @@ public class Capela {
         this.id = id;
     }
 
-    public String getDataFestaPadroeiro() {
-        return dataFestaPadroeiro;
-    }
-
-    public void setDataFestaPadroeiro(String dataFestaPadroeiro) {
-        this.dataFestaPadroeiro = dataFestaPadroeiro;
-    }
-
     public List<String> getHorarios() {
         return horarios;
     }
 
     public void setHorarios(List<String> horarios) {
         this.horarios = horarios;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getDataFestaPadroeiro() {
+        return dataFestaPadroeiro;
+    }
+
+    public void setDataFestaPadroeiro(String dataFestaPadroeiro) {
+        this.dataFestaPadroeiro = dataFestaPadroeiro;
     }
 
     public String getBatismoReunicoes() {

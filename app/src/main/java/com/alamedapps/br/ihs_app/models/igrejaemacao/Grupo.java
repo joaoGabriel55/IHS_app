@@ -9,7 +9,7 @@ public class Grupo {
     private String nome;
     private String descricao;
     private List<String> documentos;
-    private List<String> coordenadores;
+    private HashMap<String, String> coordenadores;
     private CategoriaGrupo categoriaGrupo;
     private String reuniao;
 
@@ -17,7 +17,7 @@ public class Grupo {
     }
 
     public Grupo(int id, String nome, String descricao,
-                 List<String> documentos, List<String> coordenadores,
+                 List<String> documentos, HashMap<String, String> coordenadores,
                  CategoriaGrupo categoriaGrupo, String reuniao) {
         this.id = id;
         this.nome = nome;
@@ -40,28 +40,20 @@ public class Grupo {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public List<String> getDocumentos() {
         return documentos;
-    }
-
-    public void setDocumentos(List<String> documentos) {
-        this.documentos = documentos;
-    }
-
-    public void setCoordenadores(List<String> coordenadores) {
-        this.coordenadores = coordenadores;
     }
 
     public CategoriaGrupo getCategoriaGrupo() {
         return categoriaGrupo;
     }
 
-    public void setCategoriaGrupo(CategoriaGrupo categoriaGrupo) {
-        this.categoriaGrupo = categoriaGrupo;
+    public HashMap<String, String> getCoordenadores() {
+        return coordenadores;
+    }
+
+    public void setCoordenadores(HashMap<String, String> coordenadores) {
+        this.coordenadores = coordenadores;
     }
 
     public String getNome() {
@@ -76,7 +68,4 @@ public class Grupo {
         return reuniao;
     }
 
-    public void setReuniao(String reuniao) {
-        this.reuniao = reuniao;
-    }
 }

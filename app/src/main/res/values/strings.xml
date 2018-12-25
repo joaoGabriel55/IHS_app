@@ -23,4 +23,10 @@
     <string name="documentos_card_op">Documentos</string>
     <string name="coordenadores_card_op">Coordenadores</string>
     <string name="docs_modal_label">Documentos</string>
+    <string name="coord_modal_label">Coordenadores</string>
+    <string name="contato_modal_label">Contato:</string>
+    <string name="unidade_moeda">R$</string>
+    <string name="valor_label">Valor:</string>
+    <string name="religiosidade_title">Religiosidade</string>
+    <string name="comunidade_title">Comunidade</string>
 </resources>

@@ -20,10 +20,10 @@ import java.util.List;
 
 public class GrupoDAOImpl {
 
-    private DatabaseReference  mDatabaseReference = IHSUtil.getDatabase().getReference().child("grupo");
+    private DatabaseReference mDatabaseReference;
 
     public void getAll(final GrupoAdapter adapter) {
-
+        mDatabaseReference = IHSUtil.getDatabase().getReference().child("grupo");
         Query query = mDatabaseReference.orderByChild("categoriaGrupo");
         ChildEventListener mChildEventListener = new ChildEventListener() {
             @Override
@@ -49,9 +49,5 @@ public class GrupoDAOImpl {
             }
         };
         query.addChildEventListener(mChildEventListener);
-    }
-
-    private void firebaseSearchGrupoByName(String name){
-        Query query = mDatabaseReference.orderByChild("categoriaGrupo").startAt(name).endAt(name + "\uf8ff");
     }
 }

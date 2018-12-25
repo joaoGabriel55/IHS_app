@@ -25,8 +25,11 @@ import com.alamedapps.br.ihs_app.viewholders.GrupoViewHolder;
 import com.alamedapps.br.ihs_app.viewholders.SecretariaViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Formatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
 
@@ -111,18 +114,22 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
 
         popMenuCardGenerate(grupoViewHolder, grupo);
 
-//        if (grupo.getReuniao().length() == 0) {
-//            grupoViewHolder.reuniao.setVisibility(View.GONE);
-//        }
+        if (grupo.getReuniao().trim().length() == 0) {
+            grupoViewHolder.reuniao_label.setVisibility(View.GONE);
+            grupoViewHolder.reuniao.setVisibility(View.GONE);
+        } else {
+            grupoViewHolder.reuniao_label.setVisibility(View.VISIBLE);
+            grupoViewHolder.reuniao.setVisibility(View.VISIBLE);
+        }
     }
 
     public void popMenuCardGenerate(final GrupoViewHolder grupoViewHolder, final Grupo grupo) {
+
         grupoViewHolder.menuCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context, grupoViewHolder.menuCard);
                 popupMenu.inflate(R.menu.card_menu);
-
 
                 if (grupo.getDescricao().length() == 0)
                     popupMenu.getMenu().getItem(DESCRICAO).setVisible(false);
@@ -132,6 +139,10 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
                 else {
                     String title = popupMenu.getMenu().getItem(DOCUMENTOS).getTitle().toString();
                     popupMenu.getMenu().getItem(DOCUMENTOS).setTitle(title + " (" + grupo.getDocumentos().size() + ")");
+                }
+
+                if (grupo.getCoordenadores() == null) {
+                    popupMenu.getMenu().getItem(COORDENADORES).setVisible(false);
                 }
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -149,7 +160,19 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
                                         .show();
                                 break;
                             case R.id.coodernadores_item:
-                                Toast.makeText(context, grupo.getId() + "", Toast.LENGTH_LONG).show();
+                                List<String> keyValList = new ArrayList<>();
+
+                                for (Map.Entry<String, String> entry : grupo.getCoordenadores().entrySet()) {
+                                    String key = entry.getKey();
+                                    String value = entry.getValue();
+                                    keyValList.add(key + "\n" + context.getString(R.string.contato_modal_label) + " " + value);
+                                }
+
+                                IHSUtil.generateModalInfoListItems(
+                                        context.getString(R.string.coord_modal_label) + " " + grupo.getNome(),
+                                        keyValList,
+                                        context
+                                );
                                 break;
                         }
                         return false;
@@ -158,7 +181,14 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
                 popupMenu.show();
             }
         });
+
+        if (grupo.getDocumentos() == null && grupo.getDescricao().trim().length() == 0 && grupo.getCoordenadores() == null) {
+            grupoViewHolder.menuCard.setVisibility(View.INVISIBLE);
+        } else {
+            grupoViewHolder.menuCard.setVisibility(View.VISIBLE);
+        }
     }
+
 
     @Override
     public int getItemCount() {
