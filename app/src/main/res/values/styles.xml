@@ -27,5 +27,4 @@
         <item name="android:fontFamily">@font/google_new_font</item>
         <item name="fontFamily">@font/google_new_font</item>
     </style>
-
 </resources>

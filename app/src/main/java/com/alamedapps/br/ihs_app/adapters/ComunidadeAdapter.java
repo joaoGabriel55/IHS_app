@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.comunidade.Capela;
+import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.alamedapps.br.ihs_app.viewholders.ComunidadeViewHolder;
 
 import java.util.ArrayList;
@@ -47,6 +48,74 @@ public class ComunidadeAdapter extends RecyclerView.Adapter {
         final Capela capela = capelaList.get(position);
 
         comunidadeViewHolder.nomeComunidade.setText(capela.getNome());
+        handleDataComunidade(comunidadeViewHolder, capela);
+        setActionButtonsCard(comunidadeViewHolder, capela);
+    }
+
+    private void handleDataComunidade(ComunidadeViewHolder comunidadeViewHolder, Capela capela) {
+        if (capela.getEndereco() != null) {
+            comunidadeViewHolder.enderecoLayout.setVisibility(View.VISIBLE);
+            comunidadeViewHolder.endereco.setText(capela.getEndereco());
+        } else {
+            comunidadeViewHolder.enderecoLayout.setVisibility(View.GONE);
+        }
+
+        if (capela.getCelebracao() != null) {
+            comunidadeViewHolder.celebracaoLayout.setVisibility(View.VISIBLE);
+            comunidadeViewHolder.celebracao.setText(capela.getCelebracao());
+        } else {
+            comunidadeViewHolder.celebracaoLayout.setVisibility(View.GONE);
+        }
+
+        if (capela.getBatismoReunicoes() != null || capela.getBatizadosHorario() != null) {
+            comunidadeViewHolder.batismoLayout.setVisibility(View.VISIBLE);
+            if (capela.getBatismoReunicoes() != null) {
+                comunidadeViewHolder.reuniaoBatismoLayout.setVisibility(View.VISIBLE);
+                comunidadeViewHolder.reuniaoBatismo.setText(capela.getBatismoReunicoes());
+            } else {
+                comunidadeViewHolder.reuniaoBatismoLayout.setVisibility(View.GONE);
+            }
+            if (capela.getBatizadosHorario() != null) {
+                comunidadeViewHolder.horaBatismoLayout.setVisibility(View.VISIBLE);
+                comunidadeViewHolder.horaBatismo.setText(capela.getBatizadosHorario());
+            } else {
+                comunidadeViewHolder.horaBatismo.setVisibility(View.GONE);
+            }
+        } else {
+            comunidadeViewHolder.batismoLayout.setVisibility(View.GONE);
+        }
+
+        if (capela.getHorarios() == null) {
+            comunidadeViewHolder.verHorariosBtn.setVisibility(View.GONE);
+        } else {
+            comunidadeViewHolder.verHorariosBtn.setVisibility(View.VISIBLE);
+        }
+
+        if (capela.getDataFestaPadroeiro() == null) {
+            comunidadeViewHolder.festaPadroeiroBtn.setVisibility(View.GONE);
+        } else {
+            comunidadeViewHolder.festaPadroeiroBtn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setActionButtonsCard(ComunidadeViewHolder comunidadeViewHolder, final Capela capela) {
+        comunidadeViewHolder.verHorariosBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IHSUtil.generateModalInfoListItems(
+                        context.getString(R.string.horarios_label_modal) + " " + capela.getNome(),
+                        capela.getHorarios(),
+                        context
+                );
+            }
+        });
+
+        comunidadeViewHolder.festaPadroeiroBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                IHSUtil.generateModalInfo(context.getString(R.string.modal_title_comunidade), capela.getDataFestaPadroeiro(), context);
+            }
+        });
     }
 
     @Override

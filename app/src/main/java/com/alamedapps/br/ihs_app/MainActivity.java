@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alamedapps.br.ihs_app.fragment.FragmentClero;
-import com.alamedapps.br.ihs_app.fragment.FragmentComunidade;
+import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentComunidade;
 import com.alamedapps.br.ihs_app.fragment.FragmentEvento;
 import com.alamedapps.br.ihs_app.fragment.FragmentGrupo;
 import com.alamedapps.br.ihs_app.fragment.FragmentMap;

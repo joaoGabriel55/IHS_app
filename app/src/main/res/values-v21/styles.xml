@@ -18,4 +18,10 @@
         <!--<item name="android:fontFamily">@font/google_new_font</item>-->
         <!--<item name="fontFamily">@font/google_new_font</item>-->
     </style>
+
+    <style name="FullscreenDialogTheme" parent="Theme.AppCompat.DayNight.DialogWhenLarge">
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@style/Animation.AppCompat.Dialog</item>
+    </style>
 </resources>

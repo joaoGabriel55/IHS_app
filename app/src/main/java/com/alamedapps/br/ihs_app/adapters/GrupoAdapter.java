@@ -153,11 +153,11 @@ public class GrupoAdapter extends RecyclerView.Adapter implements Filterable {
                                 IHSUtil.generateModalInfo(grupo.getNome(), grupo.getDescricao(), context);
                                 break;
                             case R.id.documentos_item:
-                                new MaterialDialog.Builder(context)
-                                        .title(context.getString(R.string.docs_modal_label) + " " + grupo.getNome())
-                                        .items(grupo.getDocumentos())
-                                        .positiveText(R.string.fechar)
-                                        .show();
+                                IHSUtil.generateModalInfoListItems(
+                                        context.getString(R.string.docs_modal_label) + " " + grupo.getNome(),
+                                        grupo.getDocumentos(),
+                                        context
+                                );
                                 break;
                             case R.id.coodernadores_item:
                                 List<String> keyValList = new ArrayList<>();

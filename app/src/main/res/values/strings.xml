@@ -29,4 +29,6 @@
     <string name="valor_label">Valor:</string>
     <string name="religiosidade_title">Religiosidade</string>
     <string name="comunidade_title">Comunidade</string>
+    <string name="horarios_label_modal">Horários</string>
+    <string name="modal_title_comunidade">Data Festa do Padroeiro</string>
 </resources>

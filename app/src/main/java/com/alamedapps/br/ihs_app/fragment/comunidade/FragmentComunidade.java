@@ -1,4 +1,4 @@
-package com.alamedapps.br.ihs_app.fragment;
+package com.alamedapps.br.ihs_app.fragment.comunidade;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -45,7 +45,7 @@ public class FragmentReligiosidade extends Fragment {
 
         recyclerView = v.findViewById(R.id.recyclerviewReligiosidade);
 
-        religiosidadeAdapter = new ReligiosidadeAdapter(null, getContext());
+        religiosidadeAdapter = new ReligiosidadeAdapter(null, getContext(), getActivity());
 
         IHSUtil.defineRecycler(recyclerView, religiosidadeAdapter, getContext(), LinearLayout.VERTICAL, false);
 
