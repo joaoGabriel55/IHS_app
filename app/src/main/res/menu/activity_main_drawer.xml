@@ -44,13 +44,35 @@
                     android:id="@+id/nav_map"
                     android:icon="@drawable/ic_outline_pin_drop_24px"
                     android:title="Como chegar?" />
-                <item
-                    android:id="@+id/nav_share"
-                    android:icon="@drawable/ic_menu_share"
-                    android:title="Redes Sociais" />
             </menu>
         </item>
     </group>
+
+    <group android:checkableBehavior="single">
+        <item android:title="Redes Sociais" android:id="@+id/redes_sociais">
+
+            <menu>
+
+                <item
+                    android:id="@+id/facebook_link"
+                    android:icon="@drawable/ic_icons8_facebook"
+                    android:title="Facebook" />
+
+                <item
+                    android:id="@+id/instagram_link"
+                    android:icon="@drawable/ic_icons8_instagram"
+                    android:title="Instagram" />
+
+                <item
+                    android:id="@+id/site_link"
+                    android:icon="@drawable/ic_globe_icon"
+                    android:title="Site" />
+
+            </menu>
+
+        </item>
+    </group>
+
 
     <group android:checkableBehavior="single">
         <item android:title="Sobre o App">

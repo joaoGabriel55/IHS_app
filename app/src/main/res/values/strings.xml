@@ -31,4 +31,7 @@
     <string name="comunidade_title">Comunidade</string>
     <string name="horarios_label_modal">Horários</string>
     <string name="modal_title_comunidade">Data Festa do Padroeiro</string>
+    <string name="facebook_link_nav">https://pt-br.facebook.com/pascomesperanca/</string>
+    <string name="insta_link_nav">https://www.instagram.com/pascomesperanca/?hl=pt-br</string>
+    <string name="site_link_nav">http://www.santuariodaesperanca.com.br/</string>
 </resources>

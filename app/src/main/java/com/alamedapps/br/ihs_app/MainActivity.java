@@ -1,5 +1,7 @@
 package com.alamedapps.br.ihs_app;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -197,6 +199,15 @@ public class MainActivity extends AppCompatActivity
                 if (item != null)
                     item.setCheckable(true);
                 break;
+            case R.id.facebook_link:
+                sendToRedeSociais(getString(R.string.facebook_link_nav));
+                break;
+            case R.id.instagram_link:
+                sendToRedeSociais(getString(R.string.insta_link_nav));
+                break;
+            case R.id.site_link:
+                sendToRedeSociais(getString(R.string.site_link_nav));
+                break;
         }
 
         //replacing the fragment
@@ -206,6 +217,12 @@ public class MainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void sendToRedeSociais(String url) {
+        Uri uri = Uri.parse(url);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     public void loadFragment(Fragment fragment) {
