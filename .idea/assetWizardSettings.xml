@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_more_vert_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_info_outline_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,10 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="3e3e3e" />
-                            <entry key="outputName" value="ic_globe_icon" />
-                            <entry key="sourceFile" value="C:\Users\Quaresma\Documents\Drive\IHS_APP\Icons\Globe_icon.svg" />
+                            <entry key="outputName" value="ic_info_outline_black_24dp" />
+                            <entry key="sourceFile" value="C:\Users\Quaresma\Documents\Drive\IHS_APP\imgs\img.svg" />
                           </map>
                         </option>
                       </PersistentState>

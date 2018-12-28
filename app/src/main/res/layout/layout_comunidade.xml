@@ -178,7 +178,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="8dp"
-            android:gravity="right"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
@@ -187,12 +187,19 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
+                android:fontFamily="@font/google_new_font"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:gravity="center"
                 android:padding="8dp"
                 android:text="FESTA PADROEIRO"
                 android:textAllCaps="true"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="18dp"
+                android:background="@color/colorDefault" />
 
             <TextView
                 android:id="@+id/ver_hora_tv_button"
@@ -202,11 +209,13 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/google_new_font"
+                android:gravity="center"
                 android:padding="8dp"
-                android:text="Ver horários"
+                android:text="Ver horários missas"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 

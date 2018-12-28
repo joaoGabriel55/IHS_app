@@ -13,9 +13,10 @@ import android.widget.TextView;
 
 import com.alamedapps.br.ihs_app.R;
 
+/**
+ * Fragment para visualizar em tela cheia as orações
+ */
 public class FragmentFullScreenDialog extends DialogFragment implements View.OnClickListener {
-
-    private Callback callback;
 
     private TextView titleOracaoTv;
     private TextView letraOracaoTv;
@@ -25,10 +26,6 @@ public class FragmentFullScreenDialog extends DialogFragment implements View.OnC
 
     public static FragmentFullScreenDialog newInstance() {
         return new FragmentFullScreenDialog();
-    }
-
-    public void setCallback(Callback callback) {
-        this.callback = callback;
     }
 
     @Override
@@ -69,12 +66,6 @@ public class FragmentFullScreenDialog extends DialogFragment implements View.OnC
                 break;
 
         }
-
-    }
-
-    public interface Callback {
-
-        void onActionClick(String name);
 
     }
 }

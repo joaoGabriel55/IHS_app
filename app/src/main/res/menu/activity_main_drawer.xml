@@ -79,7 +79,7 @@
             <menu>
                 <item
                     android:id="@+id/nav_info"
-                    android:icon="@drawable/ic_menu_manage"
+                    android:icon="@drawable/ic_info_outline_black_24dp"
                     android:title="Créditos" />
             </menu>
         </item>

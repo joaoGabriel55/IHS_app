@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.SearchView;
@@ -18,22 +19,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.alamedapps.br.ihs_app.fragment.FragmentClero;
-import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentComunidade;
+import com.alamedapps.br.ihs_app.fragment.FragmentComunidade;
 import com.alamedapps.br.ihs_app.fragment.FragmentEvento;
 import com.alamedapps.br.ihs_app.fragment.FragmentGrupo;
 import com.alamedapps.br.ihs_app.fragment.FragmentMap;
-import com.alamedapps.br.ihs_app.fragment.FragmentReligiosidade;
+import com.alamedapps.br.ihs_app.fragment.about.FragmentFullScreenDialogAbout;
+import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentFullScreenDialog;
+import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentReligiosidade;
 import com.alamedapps.br.ihs_app.fragment.FragmentSecretaria;
 import com.alamedapps.br.ihs_app.fragment.FragmentTaxas;
 import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
 import com.alamedapps.br.ihs_app.models.religiosidade.Oracao;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AdView adView;
 
     private DatabaseReference databaseReference;
     private Fragment fragment;
@@ -47,6 +55,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MobileAds.initialize(this, getString(R.string.admob_key));
+
+        adView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("3834CE844F0394CC224E3FD3596D094B").build(); //addTestDevice("3834CE844F0394CC224E3FD3596D094B")
+        adView.loadAd(adRequest);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,6 +81,30 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         displaySelectedScreen(R.id.nav_home, null);
+    }
+
+    @Override
+    protected void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -207,6 +245,10 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.site_link:
                 sendToRedeSociais(getString(R.string.site_link_nav));
+                break;
+            case R.id.nav_info:
+                DialogFragment dialog = FragmentFullScreenDialogAbout.newInstance();
+                dialog.show(getSupportFragmentManager(), "tag2");
                 break;
         }
 
