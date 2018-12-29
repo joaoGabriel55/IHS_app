@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_movimento"
+        android:icon="@drawable/ic_god"
+        android:title="Movimentos" />
+
+    <item
+        android:id="@+id/navigation_comunidade"
+        android:icon="@drawable/ic_community"
+        android:title="Comunidade" />
+
+</menu>

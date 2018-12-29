@@ -22,11 +22,6 @@
             android:title="Igreja em Ação" />
 
         <item
-            android:id="@+id/nav_comunidade"
-            android:icon="@drawable/ic_community"
-            android:title="Comunidade" />
-
-        <item
             android:id="@+id/nav_religiosidade"
             android:icon="@drawable/ic_pray"
             android:title="Religiosidade" />

@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -28,6 +30,8 @@ public class FragmentMap extends Fragment implements OnMapReadyCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_map, container, false);
+
+        setHasOptionsMenu(true);
 
         mapView = v.findViewById(R.id.map_igreja);
 
@@ -60,4 +64,14 @@ public class FragmentMap extends Fragment implements OnMapReadyCallback {
         gMap.addMarker(new MarkerOptions().position(new LatLng(LATITUDE, LONGITUDE)).title(getString(R.string.label_map)));
         gMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(LATITUDE, LONGITUDE), 18));
     }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_search);
+        menuItem.setVisible(false);
+    }
+
+
 }

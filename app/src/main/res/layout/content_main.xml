@@ -13,17 +13,17 @@
     <FrameLayout
         android:id="@+id/fragmentLayout"
         android:layout_width="match_parent"
-        android:layout_height="508dp" />
+        android:layout_height="match_parent" />
 
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:visibility="gone"
-        ads:adSize="BANNER"
-        ads:adUnitId="@string/unit_id"
-        android:background="@color/colorPrimary"/>
+    <!--<com.google.android.gms.ads.AdView-->
+    <!--android:id="@+id/adView"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+    <!--android:visibility="gone"-->
+    <!--ads:adSize="BANNER"-->
+    <!--ads:adUnitId="@string/unit_id"-->
+    <!--android:background="@color/colorPrimary"/>-->
 
 </LinearLayout>

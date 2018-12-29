@@ -1,4 +1,4 @@
-package com.alamedapps.br.ihs_app.fragment;
+package com.alamedapps.br.ihs_app.fragment.grupo;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -59,7 +59,7 @@ public class FragmentComunidade extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle(getString(R.string.comunidade_title));
+        getActivity().setTitle(R.string.pastorais_movimentos);
     }
 
     @Override

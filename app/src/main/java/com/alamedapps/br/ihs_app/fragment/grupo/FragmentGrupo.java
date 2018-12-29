@@ -1,5 +1,6 @@
-package com.alamedapps.br.ihs_app.fragment;
+package com.alamedapps.br.ihs_app.fragment.grupo;
 
+import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.arch.lifecycle.ViewModel;
 import android.content.ClipData;
@@ -24,6 +25,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -56,8 +59,9 @@ public class FragmentGrupo extends Fragment {
 
     private ConstraintLayout layoutNotFound;
 
-    private SearchView searchView = null;
-    private SearchView.OnQueryTextListener queryTextListener;
+    private RadioButton rbMovimento;
+    private RadioButton rbComunidade;
+    private RadioGroup radioGroup;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,21 +70,6 @@ public class FragmentGrupo extends Fragment {
         layoutNotFound = v.findViewById(R.id.not_found_screen);
 
         loadData();
-
-//        recyclerViewGrupo.addOnItemTouchListener(new IHSRecyclerView(getActivity(), recyclerView, new IHSRecyclerView.ItemTouch() {
-//            @Override
-//            public void clickSimples(View view, int position) {
-//                new MaterialDialog.Builder(getContext())
-//                        .title(cleroAdapter.getCleroList().get(position).getNome())
-//                        .content(
-//                                getString(R.string.data_nascimento_modal) + " " + cleroAdapter.getCleroList().get(position).getDataNascimento() + "\n" +
-//                                        getString(R.string.data_ordenacao_modal) + " " + cleroAdapter.getCleroList().get(position).getDataOrdenacao() + "\n" +
-//                                        getString(R.string.cargo_titulo_modal) + " " + cleroAdapter.getCleroList().get(position).getCargoTitulo() + "\n"
-//                        )
-//                        .positiveText(R.string.fechar)
-//                        .show();
-//            }
-//        }));
 
         return v;
     }
@@ -103,7 +92,7 @@ public class FragmentGrupo extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        loadData();
+        //loadData();
     }
 
     public GrupoAdapter getGrupoAdapter() {

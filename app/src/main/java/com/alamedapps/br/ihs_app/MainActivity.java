@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -17,14 +19,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.alamedapps.br.ihs_app.fragment.FragmentClero;
-import com.alamedapps.br.ihs_app.fragment.FragmentComunidade;
+import com.alamedapps.br.ihs_app.fragment.grupo.FragmentBottomNav;
+import com.alamedapps.br.ihs_app.fragment.grupo.FragmentComunidade;
 import com.alamedapps.br.ihs_app.fragment.FragmentEvento;
-import com.alamedapps.br.ihs_app.fragment.FragmentGrupo;
+import com.alamedapps.br.ihs_app.fragment.grupo.FragmentGrupo;
 import com.alamedapps.br.ihs_app.fragment.FragmentMap;
 import com.alamedapps.br.ihs_app.fragment.about.FragmentFullScreenDialogAbout;
-import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentFullScreenDialog;
 import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentReligiosidade;
 import com.alamedapps.br.ihs_app.fragment.FragmentSecretaria;
 import com.alamedapps.br.ihs_app.fragment.FragmentTaxas;
@@ -41,7 +46,7 @@ import com.google.firebase.database.DatabaseReference;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private AdView adView;
+//    private AdView adView;
 
     private DatabaseReference databaseReference;
     private Fragment fragment;
@@ -55,21 +60,17 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        MobileAds.initialize(this, getString(R.string.admob_key));
-
-        adView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("3834CE844F0394CC224E3FD3596D094B").build(); //addTestDevice("3834CE844F0394CC224E3FD3596D094B")
-        adView.loadAd(adRequest);
+//
+//        MobileAds.initialize(this, getString(R.string.admob_key));
+//
+//        adView = findViewById(R.id.adView);
+//        AdRequest adRequest = new AdRequest.Builder().addTestDevice("3834CE844F0394CC224E3FD3596D094B").build(); //addTestDevice("3834CE844F0394CC224E3FD3596D094B")
+//        adView.loadAd(adRequest);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         item = findViewById(R.id.action_search);
-
-        //fragmentGrupo = new FragmentGrupo();
-        //preencheDados();
-        //testeSet();
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -83,29 +84,6 @@ public class MainActivity extends AppCompatActivity
         displaySelectedScreen(R.id.nav_home, null);
     }
 
-    @Override
-    protected void onPause() {
-        if (adView != null) {
-            adView.pause();
-        }
-        super.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (adView != null) {
-            adView.resume();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        super.onDestroy();
-    }
 
     @Override
     public void onBackPressed() {
@@ -130,45 +108,6 @@ public class MainActivity extends AppCompatActivity
 
         searchView = (SearchView) item.getActionView();
         searchView.setVisibility(View.GONE);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (fragment instanceof FragmentGrupo) {
-                    fragmentGrupo = (FragmentGrupo) fragment;
-                    fragmentGrupo.getGrupoAdapter().getFilter().filter(newText);
-
-                    if (newText.length() == 0) {
-                        fragment = new FragmentGrupo();
-                        loadFragment(fragment);
-                    }
-
-                    if (fragmentGrupo.getGrupoAdapter().getGrupoList() == null) {
-                        fragmentGrupo.checkFiltedListSize(fragmentGrupo.getGrupoAdapter().getGrupoList());
-                    } else {
-                        fragmentGrupo.checkFiltedListSize(fragmentGrupo.getGrupoAdapter().getGrupoList());
-                    }
-                }
-                return false;
-            }
-        });
-
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                if (fragment instanceof FragmentGrupo) {
-                    fragment = new FragmentGrupo();
-                    loadFragment(fragment);
-                }
-                return false;
-            }
-        });
-
         return true;
     }
 
@@ -220,10 +159,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentClero();
                 break;
             case R.id.nav_igreja_acao:
-                fragment = new FragmentGrupo();
-                break;
-            case R.id.nav_comunidade:
-                fragment = new FragmentComunidade();
+                fragment = new FragmentBottomNav();
                 break;
             case R.id.nav_religiosidade:
                 fragment = new FragmentReligiosidade();
@@ -232,7 +168,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentTaxas();
                 break;
             case R.id.nav_map:
-                //startActivity(new Intent(this, MapActivity.class));
                 fragment = new FragmentMap();
                 if (item != null)
                     item.setCheckable(true);
@@ -284,39 +219,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void preencheDados() {
-
-        databaseReference = IHSUtil.getDatabase().getReference().child("religiosidade");
-
-        Oracao oracao1 = new Oracao(1, "Oração a Nossa Senhora da Esperança (Padroeira)", "Senhora da Esperança, tua alegria era fazer a vontade do Pai.\n" +
-                "Tua vida era estar atenta às necessidades dos outros.\n" +
-                "Intercede por nós!\n" +
-                "Quando nossa fé vacilar, quando somos tentados a desesperar.\n" +
-                "Senhora da Esperança, intercede por nós!\n" +
-                "Quando fechamos o coração, quando consentimos à injustiça.\n" +
-                "Senhora da Esperança, intercede por nós!\n" +
-                "Quando parece ser difícil seguir teu filho, quando nos cansamos de fazer o bem.\n" +
-                " Senhora da Esperança, intercede por nós!\n" +
-                "Quando o não se antecipa ao nosso sim.\n" +
-                " Senhora da Esperança, leva-nos a Jesus Cristo, nossa esperança.\n" +
-                "Amém.");
-
-        Oracao oracao2 = new Oracao(2, "Oração de Santo Inácio de Loyola (Co-padroeiro)", "Oração de Santo Inácio de Loyola\n" +
-                "Tomai, Senhor, e recebei\n" +
-                "Toda a minha liberdade,\n" +
-                "A minha memória,\n" +
-                "O meu entendimento,\n" +
-                "E toda a minha vontade.\n" +
-                "Tudo o que tenho e possuo, de vós, Senhor, o recebi.\n" +
-                "A Vós, Senhor, o entrego e restituo.\n" +
-                "Para que disponhais de tudo\n" +
-                "Segundo a vossa Santíssima vontade.\n" +
-                "Dai-me o vosso amor e vossa graça e isto me basta. \n" +
-                "Nenhuma outra coisa desejo,\n" +
-                "de Vossa misericórdia infinita,\n" +
-                "Amém.");
-
-        databaseReference.push().setValue(oracao1);
-        databaseReference.push().setValue(oracao2);
     }
 
     private void testeSet() {

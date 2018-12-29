@@ -56,7 +56,7 @@
 
         <TextView
             android:id="@+id/reuniao_grupo"
-            android:layout_width="292dp"
+            android:layout_width="312dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="14dp"
@@ -64,7 +64,7 @@
             android:layout_marginRight="14dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:text="Reuniao conteudo"
+            android:text="Um telefone Android™ pode executar muitas das mesmas funções que um computador. ...... No Modo para avião, os transceptores de rede e de rádio do telefone são desligados para ...... Um aplicativo, como o iMapMyFitness, é necessário para renderizar os dados reunidos por um ."
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/menu_card_grupo"

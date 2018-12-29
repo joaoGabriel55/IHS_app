@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragment.FragmentGrupo">
+    tools:context=".fragment.grupo.FragmentGrupo">
 
     <!--<include-->
     <!--android:id="@+id/toolbar"-->
     <!--layout="@layout/toolbar_support" />-->
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerviewGrupo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/navigation"
         android:visibility="visible">
 
 
@@ -23,9 +23,9 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/not_found_screen"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/textView2"
