@@ -46,11 +46,12 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/admob_key"/>
+            android:value="@string/admob_key" />
 
+        <activity android:name=".admin.DashBoardActivity" />
+        <activity android:name=".admin.RelisiosidadeActivity"></activity>
     </application>
 
 </manifest>
