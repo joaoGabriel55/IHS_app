@@ -1,53 +1,23 @@
 package com.alamedapps.br.ihs_app.fragment.grupo;
 
-import android.annotation.SuppressLint;
-import android.app.SearchManager;
-import android.arch.lifecycle.ViewModel;
-import android.content.ClipData;
-import android.content.Context;
-import android.graphics.ColorSpace;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.GrupoAdapter;
-import com.alamedapps.br.ihs_app.adapters.SecretariaAdapter;
 import com.alamedapps.br.ihs_app.dao.GrupoDAOImpl;
-import com.alamedapps.br.ihs_app.dao.SecretariaDAOImpl;
-import com.alamedapps.br.ihs_app.models.Secretaria;
 import com.alamedapps.br.ihs_app.models.igrejaemacao.Grupo;
-import com.alamedapps.br.ihs_app.utils.IHSRecyclerView;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
-import com.alamedapps.br.ihs_app.viewholders.GrupoViewHolder;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 
-import java.lang.reflect.Member;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentGrupo extends Fragment {

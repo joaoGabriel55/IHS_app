@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.comunidade.Capela;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
-import com.alamedapps.br.ihs_app.viewholders.ComunidadeViewHolder;
+import com.alamedapps.br.ihs_app.adapters.viewholders.ComunidadeViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

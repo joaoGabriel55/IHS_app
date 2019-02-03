@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Evento;
-import com.alamedapps.br.ihs_app.viewholders.EventoViewHolder;
+import com.alamedapps.br.ihs_app.adapters.viewholders.EventoViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

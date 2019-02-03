@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
-import com.alamedapps.br.ihs_app.viewholders.TaxasViewHolder;
+import com.alamedapps.br.ihs_app.adapters.viewholders.TaxasViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.alamedapps.br.ihs_app.fragment;
+package com.alamedapps.br.ihs_app.fragment.gallery;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,51 +10,53 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.alamedapps.br.ihs_app.R;
-import com.alamedapps.br.ihs_app.adapters.SecretariaAdapter;
-import com.alamedapps.br.ihs_app.dao.SecretariaDAOImpl;
-import com.alamedapps.br.ihs_app.models.Secretaria;
+import com.alamedapps.br.ihs_app.adapters.GalleryAdapter;
+import com.alamedapps.br.ihs_app.dao.GalleryDAOImpl;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class FragmentSecretaria extends Fragment {
+public class FragmentGallery extends Fragment  {
+
     private View v;
     private RecyclerView recyclerView;
 
-    private SecretariaAdapter secretariaAdapter;
+    private GalleryAdapter galleryAdapter;
 
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mDatabaseReference;
     private ChildEventListener mChildEventListener;
 
-    private Secretaria secretaria;
+    private ImageView imageView;
 
-    public FragmentSecretaria() {
+    public FragmentGallery() {
         mFirebaseDatabase = IHSUtil.getDatabase();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_secretaria, container, false);
+        v = inflater.inflate(R.layout.fragment_clero, container, false);
 
         setHasOptionsMenu(true);
 
-        mDatabaseReference = mFirebaseDatabase.getReference().child("secretaria");
+        imageView = v.findViewById(R.id.image_clero);
 
-        recyclerView = v.findViewById(R.id.recyclerviewSecretaria);
+        mDatabaseReference = mFirebaseDatabase.getReference().child("galleries");
 
-        secretariaAdapter = new SecretariaAdapter(null, getContext());
-        recyclerView.setAdapter(secretariaAdapter);
+        recyclerView = v.findViewById(R.id.recyclerviewClero);
+
+        galleryAdapter = new GalleryAdapter(null, getContext(), getActivity());
+
+        GalleryDAOImpl galleryDAO = new GalleryDAOImpl();
+        galleryDAO.getAll(mChildEventListener, mDatabaseReference, galleryAdapter);
+
+        recyclerView.setAdapter(galleryAdapter);
         RecyclerView.LayoutManager layout = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layout);
-
-        SecretariaDAOImpl secretariaDAO = new SecretariaDAOImpl();
-        secretaria = new Secretaria();
-        secretariaDAO.getAllEventos(mChildEventListener, secretaria, mDatabaseReference, secretariaAdapter);
-
 
         return v;
     }
@@ -63,14 +65,14 @@ public class FragmentSecretaria extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        getActivity().setTitle(R.string.secretaria);
+        getActivity().setTitle(getString(R.string.galeria));
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-
         MenuItem menuItem = menu.findItem(R.id.action_search);
         menuItem.setVisible(false);
     }
 }
+

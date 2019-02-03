@@ -1,19 +1,21 @@
 package com.alamedapps.br.ihs_app.dao;
 
 import com.alamedapps.br.ihs_app.adapters.CleroAdapter;
+import com.alamedapps.br.ihs_app.adapters.GalleryAdapter;
 import com.alamedapps.br.ihs_app.models.Clero;
+import com.alamedapps.br.ihs_app.models.gallery.Gallery;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
-public class CleroDAOImpl {
+public class GalleryDAOImpl {
 
-    public void getAll(ChildEventListener mChildEventListener, DatabaseReference databaseReference, final CleroAdapter adapter) {
+    public void getAll(ChildEventListener mChildEventListener, DatabaseReference databaseReference, final GalleryAdapter adapter) {
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Clero clero = dataSnapshot.getValue(Clero.class);
+                Gallery clero = dataSnapshot.getValue(Gallery.class);
                 adapter.add(clero);
             }
 
@@ -35,6 +37,4 @@ public class CleroDAOImpl {
         };
         databaseReference.addChildEventListener(mChildEventListener);
     }
-
-
 }

@@ -27,6 +27,11 @@
             android:title="Religiosidade" />
 
         <item
+            android:id="@+id/nav_galeria"
+            android:icon="@drawable/ic_outline_photo_library_24px"
+            android:title="Galerias" />
+
+        <item
             android:id="@+id/nav_taxas"
             android:icon="@drawable/ic_coins"
             android:title="Taxas e Emolumentos" />

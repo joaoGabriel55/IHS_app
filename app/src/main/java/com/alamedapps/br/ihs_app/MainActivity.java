@@ -25,10 +25,11 @@ import com.alamedapps.br.ihs_app.fragment.FragmentSecretaria;
 import com.alamedapps.br.ihs_app.fragment.FragmentTaxas;
 import com.alamedapps.br.ihs_app.fragment.about.FragmentFullScreenDialogAbout;
 import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentReligiosidade;
+import com.alamedapps.br.ihs_app.fragment.gallery.FragmentGallery;
 import com.alamedapps.br.ihs_app.fragment.grupo.FragmentBottomNav;
 import com.alamedapps.br.ihs_app.fragment.grupo.FragmentGrupo;
 import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
-import com.alamedapps.br.ihs_app.models.religiosidade.Oracao;
+import com.alamedapps.br.ihs_app.models.gallery.Gallery;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -159,6 +160,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_religiosidade:
                 fragment = new FragmentReligiosidade();
                 break;
+            case R.id.nav_galeria:
+                fragment = new FragmentGallery();
+                break;
             case R.id.nav_taxas:
                 fragment = new FragmentTaxas();
                 break;
@@ -215,46 +219,25 @@ public class MainActivity extends AppCompatActivity
 
     private void preencheDados() {
 
-        databaseReference = IHSUtil.getDatabase().getReference().child("religiosidade");
+        databaseReference = IHSUtil.getDatabase().getReference().child("galleries");
 
-        Oracao oracao1 = new Oracao(3, "História de Nª Sra da Esperança", "Paróquia de Nossa Senhora da Esperança – Cidade da Esperança – Natal\n" +
-                "As senhoras católicas de natal, estão promovendo festividades, reuniões familiares nos clubes da cidade, afim de conseguirem arrecadar auxílios suficientes para edificação de uma capela que terá o nome de Nossa Senhora da Esperança.\n" +
-                "É uma Idéia feliz essa das senhoras católicas de natal, que deve ser visto, por todos com um movimento importante, pois é uma homenagem mais correta e mais do coração que se vai prestar a Nossa Senhora, dedicando-lhe mais um templo, mais uma casa de oração.\n" +
-                "Natal conta com um bom número de Igrejas e capelas em que Nossa Senhora tem nela seu nome e algumas com mais de século, porém nunca é demais quando aquele que se deseja homenagear é possuído de grandes méritos.\n" +
-                "Nossa Senhora da Esperança! É um titulo sugestivo, grande, elevado. Para as criaturas atribuladas, cercadas de dificuldades, às vezes, quando, desamparados, elevam seus pensamentos aos céu, e invoca aquela que é Mãe da Esperança.\n" +
-                "A devoção à Nossa Senhora é universal. Para manifestação dessa verdade aí estão os vários títulos pelos quais, ela é invocada.\n" +
-                "Todos os Títulos, ou invocações que se dá à Nossa Senhora que são conhecidas até hoje, vieram com o correr dos tempos e foram aparecendo na razão das necessidades e dos acontecimentos e todos receberam da Igreja a plena aprovação.\n" +
-                "“….. No Brasil, a devoção à Nossa Senhora da Esperança nasceu na manhã de seu descobrimento, veio de Portugal, trazida pelas mãos de Pedro Álvares Cabral. No século XVI, quando os padres jesuítas deram início em 1549 ao aldeamento e catequizarão, dos índios, já encontraram com os colonizadores, bem firmados à devoção e ao culto à Nossa Senhora. Em muitos lugares, era conhecida com os nomes da Ajuda, da Conceição, do Carmo, Do Rosário e da Esperança.\n" +
-                "É bom, sim, que se multipliquem os templos dedicados à Nossa Senhora, para que desse modo se manifestem com intensidade no coração do povo, mais fé e mais confiança naquela que tudo pode.”");
-        Oracao oracao2 = new Oracao(4, "História de Santo Inácio de Loyola", "Seu nome de batismo era Iñigo Lopez de Loyola. Nasceu em 1491, numa família rica, nobre e cristã, na cidade de Azpeitia, pertencente à província basca de Guipuzcoa, Espanha. Era o caçula de treze irmãos. Sua educação foi toda voltada para fazer dele um aristocrata. Por isso, ele cresceu no meio do luxo da corte. Era praticante de esportes, dedicando-se mais aos equestres. \n" +
-                "\n" +
-                "Poder e esportes\n" + "\n" +
-                "No ano 1506, sua família Lopez de Loyola prestava serviço ao tesoureiro do reino de Castela chamado João Velásquez de Cuellar, de quem Iñigo era parente. Um ano depois, Iñigo foi feito cortesão e pagem no grande castelo desse tesoureiro. Lá, estudou e adquiriu grande cultura. Tornou-se excelente cavaleiro e passou a apreciar as aventuras militares. Por seu temperamento, valorizava mais o orgulho que os prazeres da luxúria. \n" +
-                "\n" +
-                "Militar\n" + "\n" +
-                "Dez anos mais, em 1517, aos 26 anos, Iñigo abraçou a carreira militar. Como tal, foi prestar seus serviços a outro parente muito importante: conhecido como duque de Najera. Este era nada menos que o vice-rei de Navarra. Iñigo defendeu seu parente real em inúmeras batalhas, tanto militares quanto diplomáticas. \n" +
-                "\n" +
-                "Uma bala de canhão muda sua história\n" + "\n" +
-                "Aconteceu, porém, que no dia 20 de maio de 1521, a bala de um canhão mudou sua história. Esta causou-lhe um grave ferimento na tíbia da perna esquerda, quando ele lutava defendendo a cidade de Pamplona. Por causa desse ferimento, Iñigo teve que ficar um longo tempo em recuperação. Nesse período, por acaso, deixou de ler romances de guerra e infantaria e começou a ler livros sobre a vida de vários santos e sobre a Paixão de Cristo. E assim, a graça de deus o tocou. Incentivado e poiado por irmã de sangue que cuidava dele, Iñigo abandonou de vez os livros que antes amava e passou a ler apenas e tão somente livros religiosos. Uma vez curado, decidiu trocar a vida militar pela dedicação a Deus.\n" +
-                "\n" +
-                "Uma espada ficou pendurada\n" + "\n" +
-                "Um gesto marcou a decisão de Iñigo. Ele foi à capela do santuário de Nossa Senhora de Montserrat e, lá, deixou sua espada pendurada no altar. Tendo feito isso, deu as costas ao mundo, à corte e às aparências. De 1522 a 1523, retirou-se passando a vier numa caverna em Manresa. Vivia vide de eremita e mendigava para sobreviver. Passou esse tempo em penitência e solidão. Passou por sérias necessidades. Por outro lado, esse período foi bastante fértil. Durante esse tempo ele preparou toda a base de sua obra mais importante: o livro intitulado \"Exercícios espirituais\". Do campo de batalhas Iñigo assumiu a grande batalha espiritual, indo, depois, estudar filosofia e teologia nas cidades de Paris e Veneza.\n" +
-                "\n" +
-                "Nasce a Companhia de Jesus\n" + "\n" +
-                "Em Paris, Iñigo conheceu seis amigos. Juntos, eles fundaram a Companhia de Jesus em 15 de agosto de 1534. Entre esses amigos estava São Francisco Xavier, um dos maiores missionários da Ordem, grande evangelizador da Ásia e do Japão. Este grupo de irmãos na fé só receberam a ordenação sacerdotal em 1537, ao concluírem os estudos. Na ordenação, Iñigo assumiu o nome de Inácio. Depois de três anos, o papa Paulo III deu aprovação oficial à nova Ordem. Inácio de Loyola foi eleito para assumir o posto de superior-geral. \n" +
-                "\n" +
-                "Missionário enviando missionários\n" + "\n" +
-                "Santo Inácio de Loyola formou e enviou missionários jesuítas a várias partes do mundo. Eles tinham a missão de implantarem a fé cristã, especialmente entre povos nativos pagãos das terras mais longínquas das Américas e da Ásia. Seus missionários jesuítas levaram o Evangelho de Jesus Cristo de maneira heroica e poderosa aos lugares mais improváveis e desconhecidos. Muitos morreram martirizados por causa da fé em Cristo, deixando maravilhosos testemunhos de coragem, fé e amor a Deus.\n" +
-                "\n" +
-                "Morte\n" + "\n" +
-                "Por outro lado, desde que Santo Inácio assumiu o cargo de superior geral da Ordem, sua saúde só piorou. Muito debilitado, ele veio a falecer em 31 de julho de 1556, em Roma. Tinha, então, 65 anos. Sua canonização foi celebrada pelo papa Gregório XV no ano 1622. Em 1922 o Papa Pio XI o declarou Padroeiro dos Retiros Espirituais. \n" +
-                "\n" +
-                "Fonte: https://cruzterrasanta.com.br");
+        Gallery gallery1 = new Gallery(1, "img_ihs (8).jpeg", "1° noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/eqqhEFZuYvKC6AKy6");
+        Gallery gallery2 = new Gallery(2, "img_ihs (1).jpeg", "2ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/fS97F5RFbg94aD8S6");
+        Gallery gallery3 = new Gallery(3, "img_ihs (2).jpeg", "Missa dos enfermos com unção", "https://photos.app.goo.gl/5fpeHX447qUtYNi69");
+        Gallery gallery4 = new Gallery(4, "img_ihs (3).jpeg", "3ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/H6nLZf84eyRr3ttKA");
+        Gallery gallery5 = new Gallery(5, "img_ihs (4).jpeg", "4ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/2NwxgTLw3mqvWmNd6");
+        Gallery gallery6 = new Gallery(6, "img_ihs (5).jpeg", "5ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/PT4UoBvNof5wTLzg7");
+        Gallery gallery7 = new Gallery(7, "img_ihs (6).jpeg", "6ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/239G3fBhhXjGBjXS6");
+        Gallery gallery8 = new Gallery(8, "img_ihs (7).jpeg", "8ª Noite da festa de Nossa Senhora da Esperança 2019", "https://photos.app.goo.gl/kZFdc3koRZdJviPK8");
 
-        databaseReference.push().setValue(oracao1);
-        databaseReference.push().setValue(oracao2);
-
-
+        databaseReference.push().setValue(gallery1);
+        databaseReference.push().setValue(gallery2);
+        databaseReference.push().setValue(gallery3);
+        databaseReference.push().setValue(gallery4);
+        databaseReference.push().setValue(gallery5);
+        databaseReference.push().setValue(gallery6);
+        databaseReference.push().setValue(gallery7);
+        databaseReference.push().setValue(gallery8);
     }
 
     private void testeSet() {

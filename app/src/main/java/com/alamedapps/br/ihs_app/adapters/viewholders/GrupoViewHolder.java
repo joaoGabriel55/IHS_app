@@ -1,6 +1,5 @@
-package com.alamedapps.br.ihs_app.viewholders;
+package com.alamedapps.br.ihs_app.adapters.viewholders;
 
-import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alamedapps.br.ihs_app.R;
-import com.alamedapps.br.ihs_app.models.igrejaemacao.CategoriaGrupo;
 
 public class GrupoViewHolder extends RecyclerView.ViewHolder {
 

@@ -1,8 +1,6 @@
 package com.alamedapps.br.ihs_app.adapters;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +9,8 @@ import android.view.ViewGroup;
 
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Clero;
-import com.alamedapps.br.ihs_app.models.Secretaria;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
-import com.alamedapps.br.ihs_app.viewholders.CleroViewHolder;
-import com.alamedapps.br.ihs_app.viewholders.SecretariaViewHolder;
+import com.alamedapps.br.ihs_app.adapters.viewholders.CleroViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +49,7 @@ public class CleroAdapter extends RecyclerView.Adapter {
         final Clero clero = cleroList.get(position);
 
         cleroViewHolder.nome.setText(clero.getNome());
-        IHSUtil.handleImage(cleroViewHolder.image, clero);
+        IHSUtil.handleImage(cleroViewHolder.image, clero.getImage());
 
     }
 

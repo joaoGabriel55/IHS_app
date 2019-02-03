@@ -73,5 +73,4 @@ public class FragmentMap extends Fragment implements OnMapReadyCallback {
         menuItem.setVisible(false);
     }
 
-
 }

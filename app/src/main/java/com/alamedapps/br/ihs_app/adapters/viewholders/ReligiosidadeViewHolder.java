@@ -1,4 +1,4 @@
-package com.alamedapps.br.ihs_app.viewholders;
+package com.alamedapps.br.ihs_app.adapters.viewholders;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

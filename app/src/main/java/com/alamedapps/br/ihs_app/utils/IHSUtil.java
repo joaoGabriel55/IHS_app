@@ -1,27 +1,19 @@
 package com.alamedapps.br.ihs_app.utils;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.models.Clero;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -44,9 +36,9 @@ public class IHSUtil {
         recyclerView.setLayoutManager(layout);
     }
 
-    public static void handleImage(final ImageView imageView, Clero clero) {
+    public static void handleImage(final ImageView imageView, String image) {
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        final StorageReference storageRef = storage.getReference().child(clero.getImage());
+        final StorageReference storageRef = storage.getReference().child(image);
 
         Glide.with(imageView.getContext().getApplicationContext())
                 .using(new FirebaseImageLoader())
@@ -62,7 +54,7 @@ public class IHSUtil {
                 .show();
     }
 
-    public static void generateModalInfoListItems(String title, Collection<String> items, Context context){
+    public static void generateModalInfoListItems(String title, Collection<String> items, Context context) {
         new MaterialDialog.Builder(context)
                 .title(title)
                 .items(items)
