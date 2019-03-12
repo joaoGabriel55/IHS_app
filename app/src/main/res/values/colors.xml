@@ -5,4 +5,5 @@
     <color name="colorAccent">#278044</color>
     <color name="colorDefault">#cecece</color>
     <color name="colorDefaultClick">#cfcfcf</color>
+    <color name="primaryColorDark">#1976D2</color>
 </resources>

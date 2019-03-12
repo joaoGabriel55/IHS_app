@@ -19,6 +19,8 @@ import java.util.List;
 
 public class IHSUtil {
 
+    public static String DATABASE = "dataBaseDev/";
+
     private static FirebaseDatabase database;
 
     public static FirebaseDatabase getDatabase() {

@@ -32,7 +32,6 @@ public class CleroAdapter extends RecyclerView.Adapter {
     public void add(Clero clero) {
         cleroList.add(clero);
         notifyItemInserted(cleroList.size() + 1);
-
     }
 
     @NonNull

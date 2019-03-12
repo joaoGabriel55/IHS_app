@@ -3,7 +3,6 @@ package com.alamedapps.br.ihs_app;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -28,12 +27,12 @@ import com.alamedapps.br.ihs_app.fragment.comunidade.FragmentReligiosidade;
 import com.alamedapps.br.ihs_app.fragment.gallery.FragmentGallery;
 import com.alamedapps.br.ihs_app.fragment.grupo.FragmentBottomNav;
 import com.alamedapps.br.ihs_app.fragment.grupo.FragmentGrupo;
-import com.alamedapps.br.ihs_app.models.TaxasEmolumentos;
-import com.alamedapps.br.ihs_app.models.gallery.Gallery;
+import com.alamedapps.br.ihs_app.fragment.news.FragmentNews;
+import com.alamedapps.br.ihs_app.models.news.News;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
+
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //preencheDados();
+//        preencheDados();
 
 //
 //        MobileAds.initialize(this, getString(R.string.admob_key));
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        displaySelectedScreen(R.id.nav_home, null);
+        displaySelectedScreen(R.id.nav_news, null);
     }
 
 
@@ -145,6 +144,9 @@ public class MainActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (itemId) {
+            case R.id.nav_news:
+                fragment = new FragmentNews();
+                break;
             case R.id.nav_home:
                 fragment = new FragmentEvento();
                 break;
@@ -219,45 +221,28 @@ public class MainActivity extends AppCompatActivity
 
     private void preencheDados() {
 
-        databaseReference = IHSUtil.getDatabase().getReference().child("galleries");
+        databaseReference = IHSUtil.getDatabase().getReference().child(IHSUtil.DATABASE + "news");
 
-        Gallery gallery1 = new Gallery(1, "img_ihs (8).jpeg", "1° noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/eqqhEFZuYvKC6AKy6");
-        Gallery gallery2 = new Gallery(2, "img_ihs (1).jpeg", "2ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/fS97F5RFbg94aD8S6");
-        Gallery gallery3 = new Gallery(3, "img_ihs (2).jpeg", "Missa dos enfermos com unção", "https://photos.app.goo.gl/5fpeHX447qUtYNi69");
-        Gallery gallery4 = new Gallery(4, "img_ihs (3).jpeg", "3ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/H6nLZf84eyRr3ttKA");
-        Gallery gallery5 = new Gallery(5, "img_ihs (4).jpeg", "4ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/2NwxgTLw3mqvWmNd6");
-        Gallery gallery6 = new Gallery(6, "img_ihs (5).jpeg", "5ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/PT4UoBvNof5wTLzg7");
-        Gallery gallery7 = new Gallery(7, "img_ihs (6).jpeg", "6ª noite de novena de Nossa Senhora da Esperança", "https://photos.app.goo.gl/239G3fBhhXjGBjXS6");
-        Gallery gallery8 = new Gallery(8, "img_ihs (7).jpeg", "8ª Noite da festa de Nossa Senhora da Esperança 2019", "https://photos.app.goo.gl/kZFdc3koRZdJviPK8");
 
-        databaseReference.push().setValue(gallery1);
-        databaseReference.push().setValue(gallery2);
-        databaseReference.push().setValue(gallery3);
-        databaseReference.push().setValue(gallery4);
-        databaseReference.push().setValue(gallery5);
-        databaseReference.push().setValue(gallery6);
-        databaseReference.push().setValue(gallery7);
-        databaseReference.push().setValue(gallery8);
+        News news = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo", "Sociedade Esportiva Palmeiras (pronúncia em português: /sosiedˈadʒi ispoɾtʃˈivə pawmˈejɾəs/[3]), conhecida popularmente como o Palmeiras, é um clube poliesportivo brasileiro sediado em São Paulo que tem como modalidade esportiva principal o futebol, com um dos times mais vencedores e que está entre as equipes com maior torcida do País. As cores do clube, presentes no escudo e bandeira oficial, são o verde e branco.[4] O vermelho, presente desde sua fundação em 1914, foi excluído durante a Segunda Guerra Mundial, por pressão do governo nacional, na mesma reunião que formalizou a mudança de nome de Palestra Itália para Palmeiras.[5]\n" +
+                "\n" +
+                "Seus títulos mais importantes conquistados no futebol são a Copa Libertadores da América de 1999[6] e a Copa Rio de 1951, considerado na época como um Mundial de Clubes de futebol[7] e reconhecido como tal pela FIFA, por meio do presidente da entidade, Joseph Blatter, em agosto de 2014[8][9] e por meio de documento encaminhado ao Ministério do Esporte do Brasil em novembro do mesmo ano.[10][11] A entidade, no entanto, não reconhece a competição como um torneio oficial FIFA e reforçou este posicionamento em outubro de 2017, quando reconheceu os vencedores da Copa Intercontinental como campeões mundiais,[12] sem, também, promover a unificação da Copa Intercontinental com a sua atual competição.[13][14]\n" +
+                "\n" +
+                "O Palmeiras é a equipe brasileira com o maior número de títulos de abrangência nacional conquistados, sendo o único a vencer todas as competições oficiais que disputou criadas no País, inicialmente pela Confederação Brasileira de Desportos (CBD) e, a partir de 1980, pela Confederação Brasileira de Futebol (CBF).[15] O alviverde possui 14 conquistas deste porte,[16] com destaque maior para seus dez títulos do Campeonato Brasileiro (atual recordista):[17] 1960, 1967(1), 1967(2), 1969, 1972, 1973, 1993, 1994, 2016 e 2018. Além destes campeonatos, o Palmeiras já venceu no país as Copas do Brasil de 1998, 2012 e de 2015 e a Copa dos Campeões de 2000, competições também organizadas pela entidade máxima do futebol brasileiro.\n" +
+                "\n" +
+                "No Estado de São Paulo, o Palmeiras também é um dos principais vencedores, com 22 conquistas do Campeonato Paulista de Futebol e mais dois títulos extra da mesma competição. Em 1996, o alviverde conquistou o estadual daquele ano com a melhor campanha de uma equipe na era profissional neste campeonato.[18] Na ocasião, foi campeão com 83 pontos ganhos em 90 possíveis, com um índice de aproveitamento de 92,2% dos pontos disputados e 102 gols marcados em 30 jogos realizados. Desde então, esta marca jamais foi alcançada por qualquer outra equipe na competição.\n" +
+                "\n" +
+                "No mais recente Ranking Nacional de Clubes da CBF, que leva em conta o comportamento das equipes nas últimas cinco temporadas e que foi divulgado em dezembro de 2018, o Palmeiras é o primeiro colocado, com 16 914 pontos.[19] No último ranking da confederação que levou em conta um período histórico mais abrangente do futebol brasileiro e que foi divulgado em 2011, o Palmeiras foi o líder, com 2 366 pontos.[20]\n" +
+                "\n" +
+                "Em 2005, no dia 11 de outubro, foi sancionada na cidade de São Paulo a Lei n.º 14.060, que definiu o dia 20 de setembro como o \"Dia da Sociedade Esportiva Palmeiras\", que passou a ser lembrado anualmente na capital paulista, já que passou a integrar o Calendário Oficial do Município.[21]",
+                "news_1.jpg", new Date().toString());
+
+        databaseReference.push().setValue(news);
     }
 
-    private void testeSet() {
+    private void testeGet() {
 
-        TaxasEmolumentos t1 = new TaxasEmolumentos(1, "Intenções Gerais", 2.0);
+        databaseReference = IHSUtil.getDatabase().getReference(IHSUtil.DATABASE + "/news");
 
-        IHSUtil.getDatabase().getReference("taxasEmolumentos").child("-LIqma6OBSFGzEpgw6J4").setValue(t1)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        // ...
-                    }
-                });
     }
 }

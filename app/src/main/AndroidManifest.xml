@@ -51,7 +51,8 @@
             android:value="@string/admob_key" />
 
         <activity android:name=".admin.DashBoardActivity" />
-        <activity android:name=".admin.RelisiosidadeActivity"></activity>
+        <activity android:name=".admin.RelisiosidadeActivity" />
+        <activity android:name=".activity.NewsActivity"></activity>
     </application>
 
 </manifest>

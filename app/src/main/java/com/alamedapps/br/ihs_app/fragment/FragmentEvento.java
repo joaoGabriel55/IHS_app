@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.alamedapps.br.ihs_app.MainActivity;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.EventoAdapter;
 import com.alamedapps.br.ihs_app.dao.EventoDAOImpl;
@@ -38,13 +39,22 @@ public class FragmentEvento extends Fragment {
 
     private ImageView imageView;
 
-    public FragmentEvento(){
+    public FragmentEvento() {
         mFirebaseDatabase = IHSUtil.getDatabase();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.eventos);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_eventos, container, false);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.eventos);
 
         setHasOptionsMenu(true);
 
