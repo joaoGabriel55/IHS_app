@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.alamedapps.br.ihs_app.MainActivity;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.GrupoAdapter;
 import com.alamedapps.br.ihs_app.dao.GrupoDAOImpl;
@@ -29,9 +30,12 @@ public class FragmentGrupo extends Fragment {
 
     private ConstraintLayout layoutNotFound;
 
-    private RadioButton rbMovimento;
-    private RadioButton rbComunidade;
-    private RadioGroup radioGroup;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.pastorais_movimentos);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

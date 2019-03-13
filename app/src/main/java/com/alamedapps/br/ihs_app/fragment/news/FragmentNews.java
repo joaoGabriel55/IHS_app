@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alamedapps.br.ihs_app.MainActivity;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.NewsAdapter;
 import com.alamedapps.br.ihs_app.dao.NewsDAOImpl;
@@ -24,6 +25,13 @@ public class FragmentNews extends Fragment {
     private RecyclerView recyclerView;
 
     private NewsAdapter newsAdapter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.noticias);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

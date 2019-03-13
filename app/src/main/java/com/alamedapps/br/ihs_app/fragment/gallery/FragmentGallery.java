@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.alamedapps.br.ihs_app.MainActivity;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.GalleryAdapter;
 import com.alamedapps.br.ihs_app.dao.GalleryDAOImpl;
@@ -20,7 +21,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class FragmentGallery extends Fragment  {
+public class FragmentGallery extends Fragment {
 
     private View v;
     private RecyclerView recyclerView;
@@ -35,6 +36,13 @@ public class FragmentGallery extends Fragment  {
 
     public FragmentGallery() {
         mFirebaseDatabase = IHSUtil.getDatabase();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.galeria);
     }
 
     @Override

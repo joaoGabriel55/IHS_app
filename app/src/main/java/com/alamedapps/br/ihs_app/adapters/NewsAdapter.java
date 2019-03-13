@@ -1,9 +1,9 @@
 package com.alamedapps.br.ihs_app.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alamedapps.br.ihs_app.R;
-import com.alamedapps.br.ihs_app.adapters.viewholders.CleroViewHolder;
 import com.alamedapps.br.ihs_app.adapters.viewholders.NewsViewHolder;
-import com.alamedapps.br.ihs_app.fragment.news.DialogFragmentNewsSelected;
-import com.alamedapps.br.ihs_app.models.Clero;
+import com.alamedapps.br.ihs_app.fragment.news.NewsSelectedActivity;
 import com.alamedapps.br.ihs_app.models.news.News;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 
@@ -67,14 +65,17 @@ public class NewsAdapter extends RecyclerView.Adapter {
         newsViewHolder.newsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment dialog = DialogFragmentNewsSelected.newInstance();
+//                DialogFragment dialog = DialogFragmentNewsSelected.newInstance();
                 Bundle b = new Bundle();
                 b.putString(TITLE_NEWS_KEY, news.getTitle());
                 b.putString(CONTENT_NEWS_KEY, news.getContent());
                 b.putString(IMAGE_NAME_NEWS_KEY, news.getImage());
                 b.putString(DATE_KEY, news.getRegisterDate());
-                dialog.setArguments(b);
-                dialog.show(fragmentActivity.getSupportFragmentManager(), "tag");
+                Intent intent = new Intent(fragmentActivity, NewsSelectedActivity.class);
+                intent.putExtras(b);
+                fragmentActivity.startActivity(intent);
+//                dialog.setArguments(b);
+//                dialog.show(fragmentActivity.getSupportFragmentManager(), "tag");
             }
         });
 

@@ -76,8 +76,19 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         displaySelectedScreen(R.id.nav_news, null);
+//        setupDrawerContent(navigationView);
     }
 
+//    private void setupDrawerContent(NavigationView navigationView) {
+//        navigationView.setNavigationItemSelectedListener(
+//                new NavigationView.OnNavigationItemSelectedListener() {
+//                    @Override
+//                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+//                        displaySelectedScreen(menuItem);
+//                        return true;
+//                    }
+//                });
+//    }
 
     @Override
     public void onBackPressed() {
@@ -86,7 +97,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
 
-            if (fragment instanceof FragmentEvento)
+            if (fragment instanceof FragmentNews)
                 super.onBackPressed();
             else
                 showHome();
@@ -141,6 +152,7 @@ public class MainActivity extends AppCompatActivity
 
         //creating fragment object
         fragment = null;
+//        Class fragmentClass = null;
 
         //initializing the fragment object which is selected
         switch (itemId) {
@@ -192,8 +204,11 @@ public class MainActivity extends AppCompatActivity
         if (fragment != null) {
             loadFragment(fragment);
         }
+//        item.setChecked(true);
+        if (item != null)
+            setTitle(item.getTitle());
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 
@@ -211,7 +226,7 @@ public class MainActivity extends AppCompatActivity
 
     private void showHome() {
         //replacing the fragment
-        fragment = new FragmentEvento();
+        fragment = new FragmentNews();
         if (fragment != null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragmentLayout, fragment);

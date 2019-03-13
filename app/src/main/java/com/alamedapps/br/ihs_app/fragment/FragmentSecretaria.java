@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alamedapps.br.ihs_app.MainActivity;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.SecretariaAdapter;
 import com.alamedapps.br.ihs_app.dao.SecretariaDAOImpl;
@@ -34,6 +35,13 @@ public class FragmentSecretaria extends Fragment {
 
     public FragmentSecretaria() {
         mFirebaseDatabase = IHSUtil.getDatabase();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.secretaria);
     }
 
     @Override

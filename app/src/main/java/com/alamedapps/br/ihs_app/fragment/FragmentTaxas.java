@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.alamedapps.br.ihs_app.MainActivity;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.TaxasAdapter;
 import com.alamedapps.br.ihs_app.dao.TaxasDAOImpl;
@@ -35,6 +36,13 @@ public class FragmentTaxas extends Fragment {
 
     public FragmentTaxas() {
         mFirebaseDatabase = IHSUtil.getDatabase();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.taxas);
     }
 
     @Override
