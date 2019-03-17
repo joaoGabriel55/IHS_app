@@ -52,6 +52,7 @@
 
         <activity
             android:name=".fragment.news.NewsSelectedActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/FullscreenDialogThemeNews"></activity>
     </application>
 

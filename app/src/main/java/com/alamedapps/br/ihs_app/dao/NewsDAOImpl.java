@@ -1,8 +1,9 @@
 package com.alamedapps.br.ihs_app.dao;
 
-import com.alamedapps.br.ihs_app.adapters.GrupoAdapter;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.alamedapps.br.ihs_app.adapters.NewsAdapter;
-import com.alamedapps.br.ihs_app.models.igrejaemacao.Grupo;
 import com.alamedapps.br.ihs_app.models.news.News;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.firebase.database.ChildEventListener;
@@ -14,15 +15,17 @@ import com.google.firebase.database.Query;
 public class NewsDAOImpl {
 
     private DatabaseReference mDatabaseReference;
+    private Query query;
 
     public void getAll(final NewsAdapter adapter) {
         mDatabaseReference = IHSUtil.getDatabase().getReference().child(IHSUtil.DATABASE + "news");
-        Query query = mDatabaseReference.orderByChild("registerDate");
-        ChildEventListener mChildEventListener = new ChildEventListener() {
+        query = mDatabaseReference.orderByChild("registerDate");
+
+        query.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                News grupo = dataSnapshot.getValue(News.class);
-                adapter.add(grupo);
+                News news = dataSnapshot.getValue(News.class);
+                adapter.add(news);
             }
 
             @Override
@@ -40,7 +43,41 @@ public class NewsDAOImpl {
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
-        };
-        query.addChildEventListener(mChildEventListener);
+        });
     }
+
+    /**
+     * This method is responsible for remove old news (2 months past).
+     */
+    private void deleteOldNews() {
+        mDatabaseReference = IHSUtil.getDatabase().getReference().child(IHSUtil.DATABASE + "news");
+        query = mDatabaseReference.orderByChild("registerDate");
+        query.removeEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }
