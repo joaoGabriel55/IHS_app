@@ -10,12 +10,12 @@ public class News {
     private String title;
     private String content;
     private String image;
-    private Date registerDate;
+    private String registerDate;
 
     public News() {
     }
 
-    public News(String title, String content, String image, Date registerDate) {
+    public News(String title, String content, String image, String registerDate) {
         this.title = title;
         this.content = content;
         this.image = image;
@@ -46,11 +46,11 @@ public class News {
         this.image = image;
     }
 
-    public Date getRegisterDate() {
+    public String getRegisterDate() {
         return registerDate;
     }
 
-    public void setRegisterDate(Date registerDate) {
+    public void setRegisterDate(String registerDate) {
         this.registerDate = registerDate;
     }
 }

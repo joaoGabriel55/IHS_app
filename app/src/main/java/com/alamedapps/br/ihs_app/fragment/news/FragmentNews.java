@@ -6,22 +6,24 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alamedapps.br.ihs_app.MainActivity;
 import com.alamedapps.br.ihs_app.R;
 import com.alamedapps.br.ihs_app.adapters.NewsAdapter;
 import com.alamedapps.br.ihs_app.dao.NewsDAOImpl;
+
+import static android.view.View.GONE;
 
 public class FragmentNews extends Fragment {
 
@@ -32,7 +34,14 @@ public class FragmentNews extends Fragment {
     private Boolean isScrolling = false;
     private int currentItems, totalItems, scrollOutItems;
 
+    private LinearLayout layoutLoading;
+    private ProgressBar progressBar;
+    private TextView tvStatusNews;
+
+
     private FloatingActionButton floatingActionButton;
+    private Animation fabOpen, fabClose;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,17 +51,24 @@ public class FragmentNews extends Fragment {
             ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.noticias);
 
             floatingActionButton = ((MainActivity) getActivity()).findViewById(R.id.fab_to_top);
-            floatingActionButton.setVisibility(View.GONE);
+            floatingActionButton.setVisibility(GONE);
+
+            fabOpen = AnimationUtils.loadAnimation(getContext(), R.anim.fab_open);
+            fabClose = AnimationUtils.loadAnimation(getContext(), R.anim.fab_close);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_clero, container, false);
+        v = inflater.inflate(R.layout.fragment_news, container, false);
 
         setHasOptionsMenu(true);
 
-        recyclerView = v.findViewById(R.id.recyclerviewClero);
+        recyclerView = v.findViewById(R.id.recyclerviewNews);
+        progressBar = v.findViewById(R.id.progressBar_news);
+        layoutLoading = v.findViewById(R.id.layout_loading);
+        tvStatusNews = v.findViewById(R.id.textStatus_news);
 
         final LinearLayoutManager layout = new LinearLayoutManager(
                 getContext(), LinearLayoutManager.VERTICAL, true
@@ -63,12 +79,19 @@ public class FragmentNews extends Fragment {
         newsAdapter = new NewsAdapter(null, getContext(), getActivity(), recyclerView);
 
         NewsDAOImpl newsDAO = new NewsDAOImpl();
-        newsDAO.getAll(newsAdapter);
+        newsDAO.getAll(newsAdapter, layoutLoading, recyclerView, progressBar, tvStatusNews, floatingActionButton);
 
         recyclerView.setAdapter(newsAdapter);
 
         scrollOutItems = layout.findFirstVisibleItemPosition();
 
+        if (newsAdapter.getNewsList() != null && newsAdapter.getNewsList().size() > 10)
+            recyclerViewScrollBehavior(recyclerView, layout);
+
+        return v;
+    }
+
+    private void recyclerViewScrollBehavior(RecyclerView recyclerView, final LinearLayoutManager layout) {
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -87,22 +110,24 @@ public class FragmentNews extends Fragment {
 
                 //When scroll down...
                 if (currentFirstVisible < scrollOutItems) {
-                    AlphaAnimation animation1 = new AlphaAnimation(1, 0);
-                    animation1.setDuration(500);
-                    animation1.setStartOffset(1000);
-                    animation1.setFillAfter(true);
+                    if (isScrolling) {
+                        floatingActionButton.startAnimation(fabOpen);
+                        isScrolling = false;
+                    }
+
                     floatingActionButton.setVisibility(View.VISIBLE);
                     floatingActionButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             layout.scrollToPositionWithOffset(18, 0);
-                            floatingActionButton.setVisibility(View.GONE);
+                            floatingActionButton.setVisibility(GONE);
                         }
                     });
                 }
 
                 if (layout.findFirstCompletelyVisibleItemPosition() == 15) {
-                    floatingActionButton.setVisibility(View.GONE);
+                    floatingActionButton.startAnimation(fabClose);
+                    floatingActionButton.setVisibility(GONE);
                 }
 
                 scrollOutItems = currentFirstVisible;
@@ -110,47 +135,8 @@ public class FragmentNews extends Fragment {
 
                 currentItems = layout.getChildCount();
                 totalItems = layout.getItemCount();
-
-                if (isScrolling && (currentItems + scrollOutItems == totalItems)) {
-                    isScrolling = false;
-//                    NewsDAOImpl newsDAO = new NewsDAOImpl();
-//                    newsAdapter.getNewsList().clear();
-//                    newsDAO.getAll(newsAdapter, limit+10);
-//
-//                    recyclerView.setAdapter(newsAdapter);
-                }
             }
         });
-
-//        newsAdapter.setILoadMoreItems(new ILoadMoreItems() {
-//            @Override
-//            public void onLoadMore() {
-//                if (newsAdapter.getNewsList().size() <= limit) {
-//                    newsAdapter.add(null);
-//                    newsAdapter.notifyItemInserted(newsAdapter.getNewsList().size() - 1);
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            newsAdapter.getNewsList().remove(newsAdapter.getNewsList().size() - 1);
-//                            newsAdapter.notifyItemRemoved(newsAdapter.getNewsList().size());
-//
-//                            int index = newsAdapter.getNewsList().size();
-//                            int end = index + 10;
-//                            for (int i = index; i < end; i++) {
-//                                newsAdapter.getNewsList().add(newsAdapter.getNewsList().get(i));
-//                            }
-//                            newsAdapter.notifyDataSetChanged();
-//                            newsAdapter.setLoaded();
-//                        }
-//                    }, 300);
-//                } else {
-//                    Toast.makeText(getContext(), "Não há mais notícias", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
-
-
-        return v;
     }
 
     @Override

@@ -32,10 +32,15 @@ import com.alamedapps.br.ihs_app.fragment.grupo.FragmentBottomNav;
 import com.alamedapps.br.ihs_app.fragment.grupo.FragmentGrupo;
 import com.alamedapps.br.ihs_app.fragment.news.FragmentNews;
 import com.alamedapps.br.ihs_app.models.news.News;
+import com.alamedapps.br.ihs_app.utils.FormatterUtils;
 import com.alamedapps.br.ihs_app.utils.IHSUtil;
 import com.google.firebase.database.DatabaseReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,8 +61,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //preencheDados();
-
+//        preencheDados();
 //
 //        MobileAds.initialize(this, getString(R.string.admob_key));
 //
@@ -240,13 +244,32 @@ public class MainActivity extends AppCompatActivity
 
         databaseReference = IHSUtil.getDatabase().getReference().child(IHSUtil.DATABASE + "news");
 
+//        databaseReference.child("-La8BSLGmPq9iW7W7WO1").removeValue();
 
         News news = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
                 "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "news_1.jpg", new Date());
+                "news_1.jpg", FormatterUtils.getNowDate());
+        News news2 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "news_1.jpg", FormatterUtils.getNowDate());
 
-        for (int i = 0; i < 20; i++)
-            databaseReference.push().setValue(news);
+        News news3 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "news_1.jpg", FormatterUtils.getNowDate());
+
+        News news4 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "news_1.jpg", FormatterUtils.getNowDate());
+
+        News news5 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
+                "news_1.jpg", FormatterUtils.getNowDate());
+
+        databaseReference.push().setValue(news);
+        databaseReference.push().setValue(news2);
+        databaseReference.push().setValue(news3);
+        databaseReference.push().setValue(news4);
+        databaseReference.push().setValue(news5);
     }
 
     private void testeGet() {

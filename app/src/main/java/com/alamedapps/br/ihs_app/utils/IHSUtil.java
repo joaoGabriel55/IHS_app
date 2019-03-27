@@ -19,7 +19,7 @@ import java.util.List;
 
 public class IHSUtil {
 
-    public static String DATABASE = "dataBaseDev/";
+    public static String DATABASE = "";//dataBaseDev/
 
     private static FirebaseDatabase database;
 
@@ -62,13 +62,5 @@ public class IHSUtil {
                 .items(items)
                 .positiveText(R.string.fechar)
                 .show();
-    }
-
-    public static String formatList(List<String> listToString) {
-
-        String teste2 = listToString.toString().replace("[", "");
-        String teste3 = teste2.replace("]", "");
-
-        return teste2;
     }
 }
