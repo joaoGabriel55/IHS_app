@@ -1,12 +1,15 @@
 package com.alamedapps.br.ihs_app.fragment.news;
 
+import android.os.Build;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,8 +24,10 @@ public class NewsSelectedActivity extends AppCompatActivity {
     private ImageView imageNews;
 
     private TextView textViewTitleNews;
-    private TextView textViewContentNews;
+    //    private TextView textViewContentNews;
+    private WebView textViewContentNews;
     private TextView textViewDateNews;
+
 
     private AppBarLayout appBarLayout;
 
@@ -47,11 +52,12 @@ public class NewsSelectedActivity extends AppCompatActivity {
         imageNews = findViewById(R.id.image_news_selected);
 
         textViewTitleNews = findViewById(R.id.title_news_selected);
-        textViewContentNews = findViewById(R.id.content_news_selected);
+        textViewContentNews = findViewById(R.id.webView_text);
         textViewDateNews = findViewById(R.id.date_news_selected);
 
         textViewTitleNews.setText(titleNewsParam);
-        textViewContentNews.setText(contentNewsParam);
+        textViewContentNews.loadData(contentNewsParam, "text/html", "utf-8");
+
         textViewDateNews.setText(dateNewsParam);
 
         IHSUtil.handleImage(imageNews, "news/" + imageNewsParam);

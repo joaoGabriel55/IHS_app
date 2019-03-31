@@ -56,6 +56,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/white"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -119,15 +120,23 @@
                     android:layout_marginBottom="14dp"
                     android:background="@color/colorPrimary" />
 
-                <TextView
-                    android:id="@+id/content_news_selected"
+                <!--<TextView-->
+                <!--android:id="@+id/content_news_selected"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_margin="12dp"-->
+                <!--android:fontFamily="sans-serif"-->
+                <!--android:text="Android Material Design Support Library: Expanding/Collapsing ActionBar/Toolbar with background image and more animations when scrolling screen"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="18sp" />-->
+                <WebView
+                    android:id="@+id/webView_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:fontFamily="sans-serif"
-                    android:text="Android Material Design Support Library: Expanding/Collapsing ActionBar/Toolbar with background image and more animations when scrolling screen"
-                    android:textColor="@android:color/black"
-                    android:textSize="18sp" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="12dp" />
+
 
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

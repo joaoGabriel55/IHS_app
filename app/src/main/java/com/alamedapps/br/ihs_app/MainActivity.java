@@ -42,6 +42,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import static com.alamedapps.br.ihs_app.utils.FormatterUtils.getNowDate;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -246,30 +248,12 @@ public class MainActivity extends AppCompatActivity
 
 //        databaseReference.child("-La8BSLGmPq9iW7W7WO1").removeValue();
 
-        News news = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "news_1.jpg", FormatterUtils.getNowDate());
-        News news2 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "news_1.jpg", FormatterUtils.getNowDate());
-
-        News news3 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "news_1.jpg", FormatterUtils.getNowDate());
-
-        News news4 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "news_1.jpg", FormatterUtils.getNowDate());
-
-        News news5 = new News("Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "Real confirma a volta de Zidane; Solari pode ter um novo cargo",
-                "news_1.jpg", FormatterUtils.getNowDate());
+        News news = new News("Casamento Comunitário",
+                "<p>Dia 18 de maio teremos casamento comunitário. É necessário fazer inscrição na secretaria da paróquia ou pelo site www.santuariodaesperanca.com.br e procurar o link da pastoral familiar. \n" +
+                        "Para se casar é preciso estar casado no civil e fazer a jornada de noivos.</p>",
+                "new_1.jpeg", getNowDate());
 
         databaseReference.push().setValue(news);
-        databaseReference.push().setValue(news2);
-        databaseReference.push().setValue(news3);
-        databaseReference.push().setValue(news4);
-        databaseReference.push().setValue(news5);
     }
 
     private void testeGet() {
