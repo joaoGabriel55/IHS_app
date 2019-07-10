@@ -81,10 +81,9 @@
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="2dp"
                     android:layout_weight="0"
                     android:fontFamily="sans-serif"
-                    android:text="N. Sr. a da Esperança"
+                    android:text="N. Sra. da Esperança • "
                     android:textColor="@android:color/black"
                     android:textSize="10sp" />
 

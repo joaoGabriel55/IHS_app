@@ -38,10 +38,11 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
         android:shadowColor="#373836"
-        android:shadowRadius="5"
-        android:shadowDy="5"
         android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
         android:text="@string/nav_header_subtitle"
         android:textColor="@android:color/white" />
 
